@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Canonist — OCTQ-SK Profile</title>
+  <style>
+    /* ===============================
+       COLOR GUIDE (change per personality)
+       ===============================
+       --hero-color: main background colour of the header
+       --hero-text: text colour inside the header
+       --accent: highlight colour for titles, small buttons
+       --page-bg: page background
+       =============================== */
+
+    :root{
+      --hero-color: #bfe9ff; /* light blue — change this to personality theme colour */
+      --hero-text: #052033; /* text colour on hero */
+      --accent: #005999; /* accent colour for links/titles */
+      --page-bg: #f5fbff; /* overall background */
+      --max-width: 900px;
+      --body-text: #222;
+      --muted: #444;
+      --radius: 12px;
+      --gap: 28px;
+    }
+
+    *{box-sizing: border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--page-bg);
+      color: var(--body-text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+    }
+
+    /* ===============================
+       HEADER BAR (top navigation)
+       =============================== */
+    header.site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--hero-color);
+      color: var(--hero-text);
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo-area{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-placeholder{
+      width:40px;
+      height:auto;
+      border-radius:8px;
+      background:rgba(0,0,0,0);
+    }
+
+    .site-title{
+      font-weight:700;
+      font-size:18px;
+      color: var(--hero-text);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--hero-text);
+      font-weight:500;
+      font-size:15px;
+      transition:opacity .2s;
+    }
+
+    .nav-links a:hover{opacity:0.7;}
+
+    /* ===============================
+       HERO SECTION
+       =============================== */
+    .hero{
+      background: linear-gradient(180deg, var(--hero-color) 0%, color-mix(in srgb, var(--hero-color) 80%, white) 100%);
+      color: var(--hero-text);
+      padding: 64px 20px;
+      text-align: left;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    }
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+    .title-row{display:flex;align-items:baseline;gap:18px}
+    h1{font-size:44px;margin:0;line-height:1;}
+    .code{font-size:18px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,0.06);color:var(--accent);font-weight:600}
+    .subtitle{margin-top:12px;color:var(--muted);font-size:18px}
+	
+	.type-quote{
+  font-style: italic;
+  color: var(--muted);
+  font-size: 25px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+  opacity: 0.9;
+}
+
+	.type-quote .quote-author{
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+  text-align: right;
+  padding-right: 10px;
+}
+
+
+    .card{
+      background:white;
+      border-radius:var(--radius);
+      padding:28px;
+      margin-top:var(--gap);
+      box-shadow: 0 6px 20px rgba(8,30,50,0.06);
+    }
+
+    h2{margin:0 0 12px 0;color:var(--accent);font-size:20px}
+    p{margin:0 0 16px 0;font-size:16px}
+
+    .list{margin:12px 0 18px 0;padding-left:18px}
+    .list li{margin:10px 0}
+    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.06),transparent);margin:22px 0;border-radius:2px}
+
+    /* small screens */
+    @media (max-width:640px){
+      h1{font-size:34px}
+      .hero{padding:48px 16px}
+      .nav-links{display:none;}
+    }
+
+    /* utility */
+    .muted{color:var(--muted)}
+    .strong{font-weight:700}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-area">
+      <img src="arc.png" alt="Anthemia logo" class="logo-placeholder"></img>
+      <div class="site-title">OCTI by A.R.C.</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Back to Test</a>
+      <a href="#">Test Explanation</a>
+      <a href="#">History</a>
+      <a href="#">Creator</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="title-row">
+        <h1>Canonist</h1>
+        <div class="code">OCTQ-SK</div>
+		<div class="code">BLUE</div>
+      </div>
+      <div class="subtitle">A solitary scholar building a perfect, internal system of thought.</div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="card">
+	  <div class="type-quote">
+		“If reality does not conform to the model, then so much the worse for reality.”
+		<span class="quote-author">— William Lionfare</span>
+		</div>
+		
+     
+      <p class="muted">You are a <span class="strong">Canonist</span>, the quiet architect of a perfect system. Deep down, you feel a powerful calling to create a single, flawless master plan that explains everything within your chosen subject. You spend your life in quiet solitude because your complex thoughts are your truest companions. For you, the beauty of a perfectly logical and internally consistent system is the highest and most worthwhile goal imaginable. You are the builder of a cathedral of pure logic, designed and constructed entirely within your own mind.</p>
+		<p> You work completely alone, sometimes for decades, because the complexity of your task requires absolute focus. You aren't motivated by fame, money, or even by helping others. Your driving passion is the beautiful, clean, elegant perfection of the system itself. For you, the perfect blueprint is the ultimate achievement, whether or not the world is ready, or even able, to build it.</p>
+		<div class="sep"></div>
+		 <h2>Component Analysis</h2>
+      <ul class="list">
+        <li><strong>O (Orderly):</strong> Their goal is to create a single, all-encompassing, and perfectly structured master plan or system.</li>
+        <li><strong>C (Convergent):</strong> They use exhaustive, meticulous logic to ensure every component of their system is perfectly consistent and serves the final, unified goal.</li>
+        <li><strong>T (Thinking):</strong> Their entire life's work may be the creation of this single, monumental intellectual construct.</li>
+        <li><strong>Q (Quiet):</strong> This colossal undertaking is performed in absolute solitude, as the sheer complexity and focus required precludes any and all external distraction.</li>
+        <li><strong>SK (Schizothymic):</strong> They are motivated by the abstract, aesthetic beauty of a perfect, logical system. Their work is a purely intellectual pursuit, completely detached from the messy realities of the outside world.</li>
+      </ul>
+
+      <div class="sep"></div>
+	  
+	   <h2>Synthesized Profile</h2>
+      <p class="muted">The <span class="strong">OCTQ-SK</span> is the architect of the ivory tower, the builder of perfect, unrealizable worlds. Where the Guardian (OCTQ−SL) plans meticulously for the sake of another, this individual plans meticulously for the sake of the plan itself. They are the ultimate solitary intellectual, dedicating their life to the creation of a single, grand, unified system (O+C+T). This could be a complete philosophical system, a blueprint for a utopian society, or a universal theory of everything. They build this cathedral of pure logic in the silent vacuum of their own mind (Q), driven by a dispassionate desire for theoretical perfection (SK). Whether their grand design could ever actually work in the real world is irrelevant; the goal is the creation of the perfect blueprint.</p>
+		
+		<div class="sep"></div>
+
+     
+
+      <h2>Proposed Designation</h2>
+      <p><strong>Canonist</strong></p>
+
+      <div class="sep"></div>
+
+      <h2>Justification</h2>
+      <p>Historically, a <strong>Canonist</strong> was a scholar who compiled and created a complete, exhaustive, and internally consistent system of laws (a canon). This perfectly mirrors the <strong>OCTQ-SK's</strong> drive to create a single, authoritative, and perfectly logical system of thought (O+C+T). The work is deeply scholarly, solitary (Q), and based on objective principles, not sentiment (SK). The name evokes a work of monumental, almost sacred, intellectual effort.</p>
+		
+		
+			<div class="sep"></div>
+		<h2>Strength</h2>
+      <ul class="list">
+        <li><strong>Unmatched Focus:</strong> You have the ability to dedicate yourself to a single, complex problem for years, or even a lifetime, without being distracted. You could literally live weeks to months ignoring everything to finish what you've started.</li>
+        <li><strong>Logical Purity:</strong> Your thinking is incredibly precise, rigorous, and consistent. You can spot a logical flaw or contradiction that everyone else has missed.</li>
+        <li><strong>Incredible Depth: </strong> You seek to understand a subject's most fundamental principles and build an entire universe of thought upon them.</li>
+        <li><strong>Intellectual Integrity:</strong> You are incorruptible in your pursuit of the logical truth. You cannot be swayed by emotion, politics, or popular opinion.</li>
+      </ul>
+	  
+	  	<div class="sep"></div>
+	  	<h2>Weaknesses</h2>
+      <ul class="list">
+        <li><strong>Disconnected from Reality:</strong> Your perfect systems often don't account for the messy, unpredictable nature of the real world or human beings, making them impractical.</li>
+        <li><strong>Extreme Isolation:</strong> In your quest for focus, you can cut yourself off from the outside world, missing out on new information and valuable human connection.</li>
+        <li><strong>Intellectual Rigidity: </strong> Once your grand theory begins to form, you can be extremely resistant to any new evidence that might contradict it, seeing it as an imperfection to be dismissed.</li>
+        <li><strong>Cold Detachment:</strong> Your focus on pure logic can make you appear cold, aloof, and uninterested in the feelings or concerns of others.</li>
+      </ul>
+	  
+	  	  	<div class="sep"></div>
+	  	<h2>Best Career or Role</h2>
+      <ul class="list">
+        <li>Theoretical Physicist or Mathematician</li>
+        <li>System Architect</li>
+        <li>Philosopher</li>
+		<li>Game Designer</li>
+        <li>Author</li>
+		<li>World Building Consultant</li>
+      </ul>
+	</section>
+  </main>
+</body>
+</html>
