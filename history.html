@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ANTHEMIAN TYPOLOGY</title>
+  <style>
+    /* ===============================
+       COLOR GUIDE (change per personality)
+       ===============================
+       --hero-color: main background colour of the header
+       --hero-text: text colour inside the header
+       --accent: highlight colour for titles, small buttons
+       --page-bg: page background
+       =============================== */
+
+    :root{
+      --hero-color: #363636; /* light blue — change this to personality theme colour */
+      --hero-text: #FFFFFF; /* text colour on hero */
+      --accent: ##F2F0EF; /* accent colour for links/titles */
+      --page-bg: #f5fbff; /* overall background */
+      --max-width: 900px;
+      --body-text: #222;
+      --muted: #444;
+      --radius: 12px;
+      --gap: 28px;
+    }
+
+    *{box-sizing: border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--page-bg);
+      color: var(--body-text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+    }
+
+    /* ===============================
+       HEADER BAR (top navigation)
+       =============================== */
+    header.site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--hero-color);
+      color: var(--hero-text);
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+	.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 40px 0;
+}
+
+.nav-btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 12px 26px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 8px;
+}
+
+.nav-btn:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.05);
+}
+
+.nav-btn:active {
+  transform: scale(0.97);
+  opacity: 0.8;
+}
+
+    .logo-area{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-placeholder{
+      width:40px;
+      height:auto;
+      border-radius:8px;
+      background:rgba(0,0,0,0);
+    }
+
+    .site-title{
+      font-weight:700;
+      font-size:18px;
+      color: var(--hero-text);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--hero-text);
+      font-weight:500;
+      font-size:15px;
+      transition:opacity .2s;
+    }
+
+    .nav-links a:hover{opacity:0.7;}
+
+    /* ===============================
+       HERO SECTION
+       =============================== */
+    .hero{
+      background: linear-gradient(180deg, var(--hero-color) 0%, color-mix(in srgb, var(--hero-color) 80%, white) 100%);
+      color: var(--hero-text);
+      padding: 64px 20px;
+      text-align: left;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    }
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+    .title-row{display:flex;align-items:baseline;gap:18px}
+    h1{font-size:44px;margin:0;line-height:1;}
+    .code{font-size:18px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,0.06);color:var(--accent);font-weight:600}
+    .subtitle{margin-top:12px;color:#000000(--muted);font-size:18px}
+	
+	.type-quote{
+  font-style: italic;
+  color: var(--muted);
+  font-size: 25px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+  opacity: 0.9;
+}
+
+	.type-quote .quote-author{
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+  text-align: right;
+  padding-right: 10px;
+}
+
+
+    .card{
+      background:white;
+      border-radius:var(--radius);
+      padding:28px;
+      margin-top:var(--gap);
+      box-shadow: 0 6px 20px rgba(8,30,50,0.06);
+    }
+
+    h2{margin:0 0 12px 0;color:var(--accent);font-size:20px}
+    p{margin:0 0 16px 0;font-size:16px}
+
+    .list{margin:12px 0 18px 0;padding-left:18px}
+    .list li{margin:10px 0}
+    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.06),transparent);margin:22px 0;border-radius:2px}
+
+    /* small screens */
+    @media (max-width:640px){
+      h1{font-size:34px}
+      .hero{padding:48px 16px}
+      .nav-links{display:none;}
+    }
+
+    /* utility */
+    .muted{color:var(--muted)}
+    .strong{font-weight:700}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-area">
+      <img src="arc_white.png" alt="Anthemia logo" class="logo-placeholder"></img>
+      <div class="site-title">OCTI by A.R.C.</div>
+    </div>
+    <nav class="nav-links">
+      <a href="take_test.html">Take Test</a>
+      <a href="index.html">Test Explanation</a>
+      <a href="author.html">Creator</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="title-row">
+        <h1>
+		OCTI SYSTEM
+		</h1>
+        <div class="code">
+		ANTHEMIAN TYPOLOGY
+		</div>
+		<div class="code">
+		ALTQ SYSTEM
+		</div>
+      </div>
+      <div class="subtitle">
+	 Made by Blue Imagination
+	  </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="card">
+		
+     <h1>History of the whole system</h1>
+	 <div class="sep"></div>
+	 <h2> Origins </h2>
+      <p class="muted">
+	  The intellectual architect of the OCTI was Dr. Alistair Woodsworth, a British developmental psychologist and former secondary school counselor. Throughout the 1980s, Woodsworth worked within the public school system, where he was tasked with advising 10th-grade students on their specialization tracks for their final, pre-university years. At the time, this critical life decision was based almost entirely on two metrics: current academic grades and standardized subject-matter aptitude tests.
+	  </p>
+		<p> 
+		Woodsworth grew deeply troubled by what he witnessed. He saw students with top marks in mathematics burn out in engineering programs because their core thinking style was exploratory and creative, not systematic and procedural. He saw brilliant debaters and writers forced into sciences by their high test scores, only to feel isolated and unfulfilled by the solitary lab work. The system, he argued, was measuring a student's accumulated knowledge but was utterly blind to their innate cognitive and operational nature. This mismatch was leading to record-high university dropout rates, career changes, and widespread professional dissatisfaction.
+		</p>
+		
+		<p>
+		In 1992, Woodsworth left his counseling position and, with a modest grant from the University of Oxford, established the "Woodsworth Initiative for Educational Alignment." His central thesis was revolutionary: a student's long-term success and fulfillment depended less on what they knew and more on how their mind was built to operate. He began developing a framework to map these inherent processes. He asked fundamental questions:
+		</p>
+      <ul class="list">
+        <li>Does the student's mind work by adapting to the environment, or by imposing order upon it? (Foundational Approach)
+		</li>
+        <li>
+		When faced with a problem, does their thinking narrow to a single point, expand into countless possibilities, or reframe the problem entirely? (Cognitive Processing)
+		</li>
+        <li>
+		Is the 'reward' and sense of completion found in the perfect plan or the finished product? (Execution Method)
+		</li>
+        <li>
+		Do they draw energy from social engagement or from internal reflection? (Social Interface)
+		</li>
+      </ul>
+	  
+	  <p>Over the next decade, Woodsworth and his small team conducted one of the most extensive longitudinal studies in educational history. They profiled thousands of 10th-grade students using early paper-based versions of his index, and then meticulously tracked their academic performance, university major choices, graduation rates, and early career satisfaction. </p>
+
+      <div class="sep"></div>
+	  
+	   <h2>Standardization and ARC Validation</h2>
+      <p> By the early 2000s, Woodsworth's data was undeniable. His index predicted student satisfaction and long-term success with an accuracy rate that dwarfed traditional metrics. His work, however, remained niche and was met with skepticism from established educational bodies who favored quantifiable academic scores.
+	  </p>
+	  <p>This is when the Anthemia Regulative Collegium took notice. ARC's demographers had independently identified the "Specialization Mismatch" as a significant source of inefficiency and wasted human potential on a global scale. Woodsworth's work represented a potential solution, but his methods, while effective, were not yet rigorous enough to meet ARC's unassailable standards.</p>
+	  <p> In 2005, Dr. Woodsworth was summoned to the Grand Symposium Hall in Zurich. His entire body of research was submitted to the grueling ATHENA validation process. For three years, ARC's cognitive scientists, statisticians, and sociologists stress-tested his model. They refined his questions, eliminated cultural biases, and digitized the assessment to ensure absolute objectivity. They also added the final, crucial axis—Temperamental Axis—recognizing that the underlying emotional "climate" of an individual was a critical, overlooked factor.</p>
+	  <p> In 2008, the process was complete. Woodsworth's foundational work, now fortified and perfected by the Collegium, was officially ratified and inscribed into the Modern Anthemian Codex. It was renamed the Operational Cognition & Temperament Index (OCTI) and designated as the global standard for educational guidance.</p>
+	  
+		
+		<div class="sep"></div>
+
+     
+
+      <h2>Global Implementation</h2>
+      <p>The impact was immediate and profound. With ARC's seal of approval, the OCTI was adopted by education ministries worldwide. It became a standard component of the 10th-grade curriculum, not as a restrictive test that locked students into a path, but as an illuminating "mirror" that provided a new, essential layer of self-understanding. For the first time, students, parents, and educators had a common, objective language to discuss a student's innate wiring.</p>
+	  <p> Today, the OCTI is seen as one of the most important contributions to modern education. It has drastically reduced academic burnout and empowered generations of students to choose fields of study not just based on what they are good at, but based on who they fundamentally are. Dr. Alistair Woodsworth, celebrated as the father of the index, served as an honorary member of an ARC educational sub-committee until his passing, having lived to see his compassionate solution to a human problem become an indispensable global standard.</p>
+	  
+	  <div class="sep"></div>
+	  <div class="button-container">
+  <button class="nav-btn" onclick="location.href='author.html'">Author</button>
+  <button class="nav-btn" onclick="location.href='index.html'">About the Test</button>
+</div>
+
+
+	</section>
+  </main>
+</body>
+</html>
