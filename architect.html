@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Architect — ACTP-SK Profile</title>
+  <style>
+    /* ===============================
+       COLOR GUIDE (change per personality)
+       ===============================
+       --hero-color: main background colour of the header
+       --hero-text: text colour inside the header
+       --accent: highlight colour for titles, small buttons
+       --page-bg: page background
+       =============================== */
+
+    :root{
+      --hero-color: #bfe9ff; /* light blue — change this to personality theme colour */
+      --hero-text: #052033; /* text colour on hero */
+      --accent: #005999; /* accent colour for links/titles */
+      --page-bg: #f5fbff; /* overall background */
+      --max-width: 900px;
+      --body-text: #222;
+      --muted: #444;
+      --radius: 12px;
+      --gap: 28px;
+    }
+
+    *{box-sizing: border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--page-bg);
+      color: var(--body-text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+    }
+
+    /* ===============================
+       HEADER BAR (top navigation)
+       =============================== */
+    header.site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--hero-color);
+      color: var(--hero-text);
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo-area{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-placeholder{
+      width:40px;
+      height:auto;
+      border-radius:8px;
+      background:rgba(0,0,0,0);
+    }
+
+    .site-title{
+      font-weight:700;
+      font-size:18px;
+      color: var(--hero-text);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--hero-text);
+      font-weight:500;
+      font-size:15px;
+      transition:opacity .2s;
+    }
+
+    .nav-links a:hover{opacity:0.7;}
+
+    /* ===============================
+       HERO SECTION
+       =============================== */
+    .hero{
+      background: linear-gradient(180deg, var(--hero-color) 0%, color-mix(in srgb, var(--hero-color) 80%, white) 100%);
+      color: var(--hero-text);
+      padding: 64px 20px;
+      text-align: left;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    }
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+    .title-row{display:flex;align-items:baseline;gap:18px}
+    h1{font-size:44px;margin:0;line-height:1;}
+    .code{font-size:18px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,0.06);color:var(--accent);font-weight:600}
+    .subtitle{margin-top:12px;color:var(--muted);font-size:18px}
+	
+	.type-quote{
+  font-style: italic;
+  color: var(--muted);
+  font-size: 25px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+  opacity: 0.9;
+}
+
+	.type-quote .quote-author{
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+  text-align: right;
+  padding-right: 10px;
+}
+
+
+    .card{
+      background:white;
+      border-radius:var(--radius);
+      padding:28px;
+      margin-top:var(--gap);
+      box-shadow: 0 6px 20px rgba(8,30,50,0.06);
+    }
+
+    h2{margin:0 0 12px 0;color:var(--accent);font-size:20px}
+    p{margin:0 0 16px 0;font-size:16px}
+
+    .list{margin:12px 0 18px 0;padding-left:18px}
+    .list li{margin:10px 0}
+    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.06),transparent);margin:22px 0;border-radius:2px}
+
+    /* small screens */
+    @media (max-width:640px){
+      h1{font-size:34px}
+      .hero{padding:48px 16px}
+      .nav-links{display:none;}
+    }
+
+    /* utility */
+    .muted{color:var(--muted)}
+    .strong{font-weight:700}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-area">
+      <img src="arc.png" alt="Anthemia logo" class="logo-placeholder"></img>
+      <div class="site-title">OCTI by A.R.C.</div>
+    </div>
+    <nav class="nav-links">
+      <a href="take_test.html">Back to Test</a>
+      <a href="#">Test Explanation</a>
+      <a href="#">History</a>
+      <a href="#">Creator</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="title-row">
+        <h1>
+		Architect
+		</h1>
+        <div class="code">
+		ACTP-SK
+		</div>
+		<div class="code">
+		BLUE
+		</div>
+      </div>
+      <div class="subtitle">
+	  The pragmatic master strategist who builds the blueprints of the real world.
+	  </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="card">
+	  <div class="type-quote">
+		“Stress-test everything. The best plan is the one that survives the most scrutiny.”
+		<span class="quote-author">
+		— Erik Johan Ahlquist
+		</span>
+		</div>
+		
+     
+      <p class="muted">You are a <span class="strong">Architect</span>, 
+	  a brilliant and intensely practical system-builder. Your mind is a design studio, but unlike thinkers who work alone, you build your greatest ideas in the open. You thrive on collaboration and rigorous debate, not for the sake of friendship, but because you believe that challenging an idea is the fastest way to find its weaknesses and make it stronger.
+	  </p>
+		<p> 
+		You are known for being calm, logical, and objective. People see you as incredibly competent and reliable because you are never rattled by chaos or pressure. You adapt your plans on the fly, using pure reason to find the single best solution to any real-world problem. Your ultimate goal is to create the most elegant, efficient, and functional system possible, and then watch it work perfectly in the real world.
+		</p>
+		
+		<p>
+		Your growth lies in learning to see human emotion as a critical system variable. Practice framing your debates as collaborative "problem-solving sessions" instead of intellectual combat. Before finalizing a plan, make a point to ask others, "How will this affect people on a personal level?" By integrating empathy and user experience into your logical frameworks, you can elevate your designs from merely functional to truly great.
+		</p>
+		<div class="sep"></div>
+		 <h2>
+		 Component Analysis
+		 </h2>
+      <ul class="list">
+        <li><strong>
+		A (Adaptive):
+		</strong> 
+		Modifies tactics and solutions in response to real-time situational changes.
+		</li>
+        <li>
+		<strong>
+		C (Convergent):
+		</strong> 
+		Utilizes deductive logic to arrive at a single, correct conclusion.
+		</li>
+        <li><strong>
+		T (Thinking):
+		</strong> 
+		The primary deliverable is a well-structured plan, system, or strategy.
+		</li>
+        <li><strong>
+		P (Public):
+		</strong> 
+		Engages with the external world to process data and stress-test theories through debate and collaboration.
+		</li>
+        <li><strong>
+		SK (Schizothymic):
+		</strong>
+		 Operates from a stable, detached, and analytical emotional baseline, prioritizing objectivity over sentiment.
+		</li>
+      </ul>
+
+      <div class="sep"></div>
+	  
+	   <h2>Synthesized Profile</h2>
+      <p class="muted">The <span class="strong">ACTP-SK</span> 
+	  is a pragmatic and objective system builder. Like their Cyclothymic counterpart, they are social and adaptive strategists who build their ideas in the open. However, the core motivation and presentation are profoundly different. Where the SL type uses passion to persuade, the SK type uses dispassionate logic. Their Public engagement is not for connection but for intellectual rigor—to expose their ideas to criticism and identify flaws. They remain calm and imperturbable under pressure, making them appear highly competent and reliable. They are the social engineer who designs systems for people without being swayed by their individual feelings, focusing instead on the elegant efficiency of the overall structure.
+	  </p>
+		
+		<div class="sep"></div>
+
+     
+
+      <h2>Proposed Designation</h2>
+      <p><strong>Architect</strong></p>
+
+      <div class="sep"></div>
+
+      <h2>
+	  Justification
+	  </h2>
+      <p>An <strong>Architect</strong> 
+	  designs complex, logical systems (C+T). The design must be constantly modified to meet real-world constraints (A). This process involves extensive collaboration with clients and engineers (P). Crucially, the entire process is governed by the cool, detached, and objective principles of physics and design, not by sentiment (SK). The name perfectly encapsulates the creation of a functional, logical structure within a dynamic and collaborative environment.
+	  </p>
+		
+		
+			<div class="sep"></div>
+		<h2>Strength</h2>
+      <ul class="list">
+        <li><strong>
+		
+		Pragmatic Problem-Solving:
+		</strong> 
+		You are a genius at connecting brilliant, abstract ideas to the messy realities of the world. Your plans aren't just smart in theory; they are designed to actually work.
+		</li>
+		<li><strong>
+		
+		Intellectual Rigor: 
+		</strong> 
+		You actively seek out criticism and debate. By "war-gaming" your ideas with others, you identify and eliminate weaknesses, making your final strategies incredibly robust and well-tested.
+		</li>
+        <li><strong>
+		
+		Composure Under Pressure:
+		</strong> 
+		Your cool, detached nature allows you to think clearly and make difficult, logical decisions in high-stress situations while others might become emotional or panic.
+		</li>
+     
+      </ul>
+	  
+	  	<div class="sep"></div>
+	  	<h2>Weaknesses</h2>
+      <ul class="list">
+        <li><strong>
+		
+		Can Seem Confrontational:
+		</strong> 
+		Your love for debate and finding flaws can come across as needlessly argumentative or negative to people who prefer a more harmonious and supportive environment.
+		</li>
+        <li><strong>
+		
+		A Blind Spot for Emotions:
+		</strong> 
+		In your drive to create the most logical and efficient system, you can sometimes overlook or dismiss the emotional needs, irrational behaviors, and personal feelings of the people who have to use it.
+		</li>
+        <li><strong>
+		
+		Dismissive of Subjectivity:
+		</strong> 
+		You tend to view arguments based on "how it feels" as irrelevant data, which can alienate teammates and make you seem cold or arrogant.
+		</li>
+      </ul>
+	  
+	  <div class="sep"></div>
+		  	<h2>Core Desire</h2>
+      <p>
+	  To see their logically sound and thoroughly stress-tested blueprint become a functional, efficient reality.
+	  </p>
+
+		<h2>Core Fear</h2>
+      <p>
+	  A catastrophic, public failure of a system they designed, especially if the failure is caused by a "human factor" they dismissed as illogical.
+	  </p>
+	  
+	  	  	<div class="sep"></div>
+	  	<h2>Best Career or Role</h2>
+      <ul class="list">
+        <li>
+		Management Consultant
+		</li><li>
+		Lead Architect or Urban Planner
+		</li><li>
+		Chief Technology Officer (CTO) or Lead Software Architect
+		</li><li>
+		Military Strategist or General
+		</li><li>
+		Film Director
+		</li>
+      </ul>
+	</section>
+  </main>
+</body>
+</html>
