@@ -668,11 +668,11 @@ try {
     document.getElementById('exePct').textContent = execPct + '%';
     applyBar('exeBar', execPct);
 
-    document.getElementById('socChosen').textContent = social==='P' ? 'People (P)' : 'Quiet (Q)';
+    document.getElementById('socChosen').textContent = social==='P' ? 'Public (P)' : 'Quiet (Q)';
     document.getElementById('socPct').textContent = socialPct + '%';
     applyBar('socBar', socialPct);
 
-    document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Stable (SK)' : 'Labile (SL)';
+    document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Cyclothymic (SK)' : 'Schizothymic (SL)';
     document.getElementById('tempPct').textContent = tempPct + '%';
     applyBar('tempBar', tempPct);
 
@@ -711,3 +711,4 @@ localStorage.setItem('lastResult', JSON.stringify(resultData));
 
 </body>
 </html>
+
