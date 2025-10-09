@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Anthemian Typology Test</title>
+  <title>OCTI TEST</title>
   <style>
-   /* ===============================
+     /* ===============================
        COLOR GUIDE (change per personality)
        ===============================
        --hero-color: main background colour of the header
@@ -15,10 +15,10 @@
        =============================== */
 
     :root{
-      --hero-color: #363636; /* light blue — change this to personality theme colour */
+      --hero-color: #696969; /* light blue — change this to personality theme colour */
       --hero-text: #FFFFFF; /* text colour on hero */
-      --accent: ##F2F0EF; /* accent colour for links/titles */
-      --page-bg: #f5fbff; /* overall background */
+      --accent: #FFFFFF; /* accent colour for links/titles */
+      --page-bg: #FFFFFF; /* overall background */
       --max-width: 900px;
       --body-text: #222;
       --muted: #444;
@@ -196,10 +196,13 @@
 
     /* small explanatory footer */
     .footer-note{margin-top:18px;font-size:13px;color:#444}
+    .bar-wrap { background:#eee;border-radius:999px;height:12px;width:100%;overflow:hidden;margin-top:6px;}
+    .bar { height:100%; border-radius:999px; background:#111; width:0%; transition:width .6s ease;}
+    .pct { font-weight:700; margin-left:8px; }
   </style>
 </head>
 <body>
-<header class="site-header">
+  <header class="site-header">
     <div class="logo-area">
       <img src="arc_white.png" alt="Anthemia logo" class="logo-placeholder"></img>
       <div class="site-title">OCTI by A.R.C.</div>
@@ -207,6 +210,7 @@
     <nav class="nav-links">
      
       <a href="index.html">Test Explanation</a>
+	  <a href="alltype.html">All Types</a>
       <a href="history.html">History</a>
       <a href="author.html">Creator</a>
     </nav>
@@ -215,10 +219,10 @@
   <section class="hero">
     <div class="container">
       <div class="title-row">
-        <h1>Operational Cognition & Temperament Index Test</h1>
+        <h1>Operational Cognition & Temperament Index. </h1>
     
       </div>
-      <div class="subtitle">by Anthemia Regulative Collegium (ARC)</div>
+      <div class="subtitle">Simple question, answer them all.</div>
     </div>
   </section>
 
@@ -399,283 +403,311 @@
           </div>
         </div>
 
-        <div class="note">Note: there are 48 different results but be happy with what you get because that is the real you.</div>
+        <div class="note">Note: the quiz shows the technical code (example: ALTQ-SK) to participants after they click Get Result.</div>
       </section>
+  
+  <div class="controls">
+    <button id="getResult">Get Result</button>
+    <button id="resetBtn" type="button" class="secondary">Reset</button>
+  </div>
 
-      <!-- Controls -->
-      <div class="controls">
-        <button id="getResult">Get Result</button>
-        <button id="resetBtn" type="button" class="secondary">Reset</button>
+  <div id="incompleteAlert" class="alert" role="alert">Please answer all questions before getting a result.</div>
+
+  <div id="resultCard" class="result" role="status" aria-live="polite">
+    <div class="code" id="resultCode"></div>
+    <h2 id="resultName"></h2>
+    <div id="resultNote" class="muted"></div>
+
+    <!-- Percent summary -->
+    <div style="margin-top:12px">
+      <div><strong>Environment</strong> <span id="envChosen"></span> <span id="envPct" class="muted"></span>
+        <div class="bar-wrap"><div id="envBar" class="bar"></div></div>
       </div>
 
-      <div id="incompleteAlert" class="alert" role="alert">Please answer all questions before getting a result.</div>
-
-      <!-- Result card (monochrome, shows code + archetype, then link & redirect) -->
-      <div id="resultCard" class="result" role="status" aria-live="polite">
-        <div class="code" id="resultCode"></div>
-        <h2 id="resultName"></h2>
-        <div id="resultNote" class="muted"></div>
-        <div style="margin-top:12px">
-          <a id="resultLink" href="#" style="font-weight:700;color:#000;text-decoration:underline">Open archetype page</a>
+      <div style="margin-top:10px"><strong>Cognition</strong> <span id="cogChosen"></span>
+        <div style="display:flex;gap:8px;margin-top:6px">
+          <div style="flex:1">
+            <div style="font-size:12px">C <span id="cC" class="muted"></span></div>
+            <div class="bar-wrap"><div id="cCbar" class="bar"></div></div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:12px">D <span id="cD" class="muted"></span></div>
+            <div class="bar-wrap"><div id="cDbar" class="bar"></div></div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:12px">L <span id="cL" class="muted"></span></div>
+            <div class="bar-wrap"><div id="cLbar" class="bar"></div></div>
+          </div>
         </div>
       </div>
 
-      <div class="sr-only" aria-hidden="false">This quiz is based on a five-axis personality model (Environment, Cognition, Execution, Social, Temperament).</div>
+      <div style="margin-top:10px"><strong>Execution</strong> <span id="exeChosen"></span> <span id="exePct" class="muted"></span>
+        <div class="bar-wrap"><div id="exeBar" class="bar"></div></div>
+      </div>
 
-      <div class="footer-note">This quiz is for fun. From the OMENVEIL series.</div>
-    </main>
+      <div style="margin-top:10px"><strong>Social</strong> <span id="socChosen"></span> <span id="socPct" class="muted"></span>
+        <div class="bar-wrap"><div id="socBar" class="bar"></div></div>
+      </div>
+
+      <div style="margin-top:10px"><strong>Temperament</strong> <span id="tempChosen"></span> <span id="tempPct" class="muted"></span>
+        <div class="bar-wrap"><div id="tempBar" class="bar"></div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <a id="resultLink" href="#" style="font-weight:700;color:#000;text-decoration:underline">Open archetype page</a>
+    </div>
   </div>
-  </section>
 
-  <script>
-    /* -------------------------------
-       Archetype table (48 entries)
-       Maps full technical codes -> archetype display names.
-       We also derive the target filename by normalising the archetype name.
-       ------------------------------- */
-    const archetypeMap = {
-      "ALTQ-SK":"Enigma",
-      "OLTQ-SK":"Codebreaker",
-      "ODTQ-SK":"Clockmaker",
-      "ADTQ-SK":"Theorist",
-      "ACTQ-SK":"Mastermind",
-      "OLTP-SK":"Scholastic",
-      "OCTQ-SK":"Canonist",
-      "OCTP-SK":"Legislator",
-      "ACTP-SK":"Architect",
-      "OCTP-SL":"Director",
-      "ACTP-SL":"Orchestrator",
-      "OCWP-SK":"Taskmaster",
-      "ODTQ-SL":"Loremaster",
-      "ADTQ-SL":"Visionary",
-      "ODWQ-SK":"Inventor",
-      "ADWQ-SK":"Explorer",
-      "ODWP-SK":"Investigator",
-      "ADWP-SL":"Tinkerer",
-      "OCWQ-SL":"Ritualist",
-      "OLWQ-SL":"Conservator",
-      "ODWQ-SL":"Collector",
-      "ACWQ-SL":"Crafter",
-      "ALWQ-SL":"Steward",
-      "ADWQ-SL":"Artist",
-      "OCTQ-SL":"Guardian",
-      "OLTQ-SL":"Confessor",
-      "ALTQ-SL":"Sage",
-      "ACTQ-SL":"Counselor",
-      "ODTP-SL":"Facilitator",
-      "ODWP-SL":"Instructor",
-      "ALTP-SK":"Disruptor",
-      "ADTP-SK":"Provocateur",
-      "OLTP-SL":"Reformer",
-      "ALTP-SL":"Game-Changer",
-      "ADTP-SL":"Innovator",
-      "ALWP-SL":"Trickster",
-      "ODTP-SK":"Gamemaster",
-      "OLWP-SK":"Sophist",
-      "ALWQ-SK":"Optimizer",
-      "ALWP-SK":"Hacker",
-      "ADWP-SK":"Improviser",
-      "OLWP-SL":"Magician",
-      "OCWQ-SK":"Purist",
-      "OLWQ-SK":"Diagnostician",
-      "ACWQ-SK":"Artificier",
-      "ACWP-SK":"Engineer",
-      "OCWP-SL":"Master",
-      "ACWP-SL":"Artisan"
+ <script>
+  // Auto-redirect delay (milliseconds). Edit this to change how long the result is shown before redirect.
+  const AUTO_REDIRECT_DELAY_MS = 700;
+
+  // colour map (exact)
+  const colorMap = {
+    "Enigma":"#2b2b2b","Codebreaker":"#2b2b2b","Clockmaker":"#2b2b2b","Theorist":"#2b2b2b","Mastermind":"#2b2b2b","Scholastic":"#2b2b2b",
+    "Canonist":"#acb0ff","Legislator":"#acb0ff","Architect":"#acb0ff","Director":"#acb0ff","Orchestrator":"#acb0ff","Taskmaster":"#acb0ff",
+    "Loremaster":"#a2f1a1","Visionary":"#a2f1a1","Inventor":"#a2f1a1","Explorer":"#a2f1a1","Investigator":"#a2f1a1","Tinkerer":"#a2f1a1",
+    "Ritualist":"#c592f2","Conservator":"#c592f2","Collector":"#c592f2","Crafter":"#c592f2","Steward":"#c592f2","Artist":"#c592f2",
+    "Guardian":"#fe9d5d","Confessor":"#fe9d5d","Sage":"#fe9d5d","Counselor":"#fe9d5d","Facilitator":"#fe9d5d","Instructor":"#fe9d5d",
+    "Disruptor":"#FF5C5C","Provocateur":"#FF5C5C","Reformer":"#FF5C5C","Game-Changer":"#FF5C5C","Innovator":"#FF5C5C","Trickster":"#FF5C5C",
+    "Gamemaster":"#f4a4ef","Sophist":"#f4a4ef","Optimizer":"#f4a4ef","Hacker":"#f4a4ef","Improviser":"#f4a4ef","Magician":"#f4a4ef",
+    "Purist":"#ffff85","Diagnostician":"#ffff85","Artificier":"#ffff85","Engineer":"#ffff85","Master":"#ffff85","Artisan":"#ffff85"
+  };
+
+  const archetypeMap = {
+    "ALTQ-SK":"Enigma","OLTQ-SK":"Codebreaker","ODTQ-SK":"Clockmaker","ADTQ-SK":"Theorist","ACTQ-SK":"Mastermind",
+    "OLTP-SK":"Scholastic","OCTQ-SK":"Canonist","OCTP-SK":"Legislator","ACTP-SK":"Architect","OCTP-SL":"Director",
+    "ACTP-SL":"Orchestrator","OCWP-SK":"Taskmaster","ODTQ-SL":"Loremaster","ADTQ-SL":"Visionary","ODWQ-SK":"Inventor",
+    "ADWQ-SK":"Explorer","ODWP-SK":"Investigator","ADWP-SL":"Tinkerer","OCWQ-SL":"Ritualist","OLWQ-SL":"Conservator",
+    "ODWQ-SL":"Collector","ACWQ-SL":"Crafter","ALWQ-SL":"Steward","ADWQ-SL":"Artist","OCTQ-SL":"Guardian",
+    "OLTQ-SL":"Confessor","ALTQ-SL":"Sage","ACTQ-SL":"Counselor","ODTP-SL":"Facilitator","ODWP-SL":"Instructor",
+    "ALTP-SK":"Disruptor","ADTP-SK":"Provocateur","OLTP-SL":"Reformer","ALTP-SL":"Game-Changer","ADTP-SL":"Innovator",
+    "ALWP-SL":"Trickster","ODTP-SK":"Gamemaster","OLWP-SK":"Sophist","ALWQ-SK":"Optimizer","ALWP-SK":"Hacker",
+    "ADWP-SK":"Improviser","OLWP-SL":"Magician","OCWQ-SK":"Purist","OLWQ-SK":"Diagnostician","ACWQ-SK":"Artificier",
+    "ACWP-SK":"Engineer","OCWP-SL":"Master","ACWP-SL":"Artisan"
+  };
+
+  function filenameFromName(name){
+    return name.toLowerCase().replace(/\s+/g,'-').replace(/[^\w\-]/g,'') + '.html';
+  }
+
+  // match prefix followed by digits only (e.g. e1, e2, e3)
+  function uniqueNamesFor(prefix){
+    const els = Array.from(document.querySelectorAll('input[name]'));
+    const re = new RegExp('^' + prefix + '\\d+$'); // prefix then at least one digit
+    const names = new Set(els.map(x => x.name).filter(n => re.test(n)));
+    return Array.from(names);
+  }
+
+  function getValue(name){
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+  }
+
+  function allAnswered(){
+    const groups = [
+      ...uniqueNamesFor('env'),
+      ...uniqueNamesFor('c'),
+      ...uniqueNamesFor('e'),
+      ...uniqueNamesFor('s'),
+      ...uniqueNamesFor('t')
+    ];
+    const uniq = Array.from(new Set(groups));
+    return uniq.every(n => getValue(n) !== null);
+  }
+
+  function computePercent(num,den){
+    if(den===0) return 0;
+    return Math.round((num/den)*100);
+  }
+
+  function computeResult(){
+    document.getElementById('incompleteAlert').style.display='none';
+    if(!allAnswered()){
+      document.getElementById('incompleteAlert').style.display='block';
+      document.getElementById('resultCard').style.display='none';
+      return;
+    }
+
+    // Environment
+    const envNames = uniqueNamesFor('env');
+    const envVals = envNames.map(n => getValue(n));
+    const envTotal = envVals.length;
+    const aCount = envVals.filter(v=>v==='A').length;
+    const oCount = envTotal - aCount;
+    const envChosen = aCount >= Math.ceil(envTotal/2) ? 'A' : 'O';
+    const envPct = envChosen==='A' ? computePercent(aCount, envTotal) : computePercent(oCount, envTotal);
+
+    // Cognition
+    const cNames = uniqueNamesFor('c');
+    const cVals = cNames.map(n => getValue(n));
+    const cTotal = cVals.length;
+    const counts = {C:0,D:0,L:0};
+    cVals.forEach(v=>{
+      if(v==='C') counts.C++;
+      else if(v==='D') counts.D++;
+      else if(v==='L') counts.L++;
+    });
+    const C = counts.C, D = counts.D, L = counts.L;
+    let cog;
+    if(C===3 && D===3 && L===1) cog='L';
+    else {
+      const max = Math.max(C,D,L);
+      if(C> D && C> L) cog='C';
+      else if(D> C && D> L) cog='D';
+      else if(L> C && L> D) cog='L';
+      else {
+        if(L===max) cog='L';
+        else if(D===max) cog='D';
+        else cog='C';
+      }
+    }
+    const pctC = computePercent(C,cTotal);
+    const pctD = computePercent(D,cTotal);
+    const pctL = computePercent(L,cTotal);
+
+    // Execution
+    const eNames = uniqueNamesFor('e');
+    const eVals = eNames.map(n => getValue(n));
+    const eTotal = eVals.length;
+    const tCount = eVals.filter(v=>v==='T').length;
+    const wCount = eTotal - tCount;
+    const exec = tCount >= Math.ceil(eTotal/2) ? 'T' : 'W';
+    const execPct = exec==='T' ? computePercent(tCount,eTotal) : computePercent(wCount,eTotal);
+
+    // Social
+    const sNames = uniqueNamesFor('s');
+    const sVals = sNames.map(n => getValue(n));
+    const sTotal = sVals.length;
+    const pCount = sVals.filter(v=>v==='P').length;
+    const qCount = sTotal - pCount;
+    const social = pCount >= Math.ceil(sTotal/2) ? 'P' : 'Q';
+    const socialPct = social==='P' ? computePercent(pCount,sTotal) : computePercent(qCount,sTotal);
+
+    // Temperament
+    const tNames = uniqueNamesFor('t');
+    const tVals = tNames.map(n => getValue(n));
+    const tTotal = tVals.length;
+    const skCount = tVals.filter(v=>v==='SK').length;
+    const slCount = tTotal - skCount;
+    const temperament = skCount >= Math.ceil(tTotal/2) ? 'SK' : 'SL';
+    const tempPct = temperament==='SK' ? computePercent(skCount,tTotal) : computePercent(slCount,tTotal);
+
+    const prefix = `${envChosen}${cog}${exec}${social}`;
+    const fullCode = `${prefix}-${temperament}`;
+
+    let archetype = archetypeMap[fullCode] || null;
+    if(!archetype){
+      const keys = Object.keys(archetypeMap);
+      const prefixMatches = keys.filter(k => k.startsWith(prefix));
+      if(prefixMatches.length >= 1){
+        archetype = archetypeMap[prefixMatches[0]] + (prefixMatches.length > 1 ? ' (close/ambiguous match)' : ' (close match)');
+      }
+    }
+
+    const cleanName = archetype ? archetype.replace(' (close/ambiguous match)','').replace(' (close match)','') : null;
+    const targetFile = cleanName ? filenameFromName(cleanName) : null;
+
+    const resultData = {
+      code: fullCode,
+      finalType: cleanName || null,
+      env: { chosen: envChosen, pct: envPct, counts: {A: aCount, O: oCount, total: envTotal} },
+      cognition: { chosen: cog, pcts: {C: pctC, D: pctD, L: pctL}, counts: {C: C, D: D, L: L}, total: cTotal },
+      execution: { chosen: exec, pct: execPct, counts: {T: tCount, W: wCount, total: eTotal} },
+      social: { chosen: social, pct: socialPct, counts: {P: pCount, Q: qCount, total: sTotal} },
+      temperament: { chosen: temperament, pct: tempPct, counts: {SK: skCount, SL: slCount, total: tTotal} },
+      archetypeName: archetype
     };
 
-    /* -------------------------------
-       Utility: build filename from archetype display name
-       - lowercase, spaces -> hyphen, remove characters not allowed in filename
-       E.g. "Game-Changer" -> "game-changer.html"
-    */
-    function filenameFromName(name){
-      return name
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^\w\-]/g, '') + '.html';
+    try { // Save to sessionStorage *and* localStorage to survive tab/navigation differences
+console.log('computeResult() reached — preparing to save resultData:', resultData);
+
+try {
+  const json = JSON.stringify(resultData);
+  console.log('Serialized JSON length:', json.length);
+
+  sessionStorage.setItem('quizResult', json);
+  console.log('sessionStorage.setItem -> OK');
+
+  localStorage.setItem('quizResult', json);
+  console.log('localStorage.setItem -> OK');
+
+  localStorage.setItem('quizResult_ok', '1');
+  console.log('Saved quizResult_ok flag in localStorage -> OK');
+
+} catch (e) {
+  console.error('Failed to save quizResult:', e);
+}
+
+; } catch(e){ console.warn(e); }
+
+    const color = (cleanName && colorMap[cleanName]) ? colorMap[cleanName] : '#111';
+
+    document.getElementById('resultCode').textContent = fullCode;
+    document.getElementById('resultName').textContent = archetype || (fullCode + ' — (no archetype found)');
+    document.getElementById('resultNote').textContent = 'Percentages below show composition of answers for each axis.';
+
+    function clamp(n){ return Math.max(0, Math.min(100, n)); }
+    function applyBar(id, pct){
+      const el = document.getElementById(id);
+      if(el){ el.style.width = clamp(pct) + '%'; el.style.backgroundColor = color; }
     }
 
-    /* -------------------------------
-       Input helpers
-    */
-    function getValue(name){
-      const el = document.querySelector(`input[name="${name}"]:checked`);
-      return el ? el.value : null;
+    document.getElementById('envChosen').textContent = envChosen==='A' ? 'Adaptive (A)' : 'Ordered (O)';
+    document.getElementById('envPct').textContent = envPct + '%';
+    applyBar('envBar', envPct);
+
+    document.getElementById('cogChosen').textContent = cog;
+    document.getElementById('cC').textContent = pctC + '%';
+    document.getElementById('cD').textContent = pctD + '%';
+    document.getElementById('cL').textContent = pctL + '%';
+    applyBar('cCbar', pctC); applyBar('cDbar', pctD); applyBar('cLbar', pctL);
+
+    document.getElementById('exeChosen').textContent = exec==='T' ? 'Thinker (T)' : 'Worker (W)';
+    document.getElementById('exePct').textContent = execPct + '%';
+    applyBar('exeBar', execPct);
+
+    document.getElementById('socChosen').textContent = social==='P' ? 'People (P)' : 'Quiet (Q)';
+    document.getElementById('socPct').textContent = socialPct + '%';
+    applyBar('socBar', socialPct);
+
+    document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Stable (SK)' : 'Labile (SL)';
+    document.getElementById('tempPct').textContent = tempPct + '%';
+    applyBar('tempBar', tempPct);
+
+    const resultLink = document.getElementById('resultLink');
+    if(targetFile){
+      resultLink.href = targetFile;
+      resultLink.textContent = 'Open archetype page (' + targetFile + ')';
+    } else {
+      resultLink.href = '#';
+      resultLink.textContent = 'No archetype page available';
     }
 
-    function allAnswered(){
-      const required = [
-        'env1','env2','env3',
-        'c1','c2','c3','c4','c5','c6','c7',
-        'e1','e2','e3',
-        's1','s2','s3',
-        't1','t2','t3'
-      ];
-      return required.every(getValue);
+    document.getElementById('resultCard').style.display = 'block';
+    document.getElementById('resultCard').scrollIntoView({behavior:'smooth', block:'center'});
+
+    // === Auto-redirect (enabled) ===
+    if(targetFile){
+      setTimeout(() => {
+        // final navigation
+        try { window.location.assign(targetFile); } catch(e){ console.warn('Redirect failed', e); }
+      }, AUTO_REDIRECT_DELAY_MS);
     }
+  }
 
-    /* -------------------------------
-       Core scoring logic (same rules)
-       */
-    function computeResult(){
-      document.getElementById('incompleteAlert').style.display = 'none';
-      if(!allAnswered()){
-        document.getElementById('incompleteAlert').style.display = 'block';
-        document.getElementById('resultCard').style.display = 'none';
-        return;
-      }
+  document.getElementById('getResult').addEventListener('click', function(e){ e.preventDefault(); computeResult(); });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked=false);
+    document.getElementById('resultCard').style.display='none';
+    document.getElementById('incompleteAlert').style.display='none';
+    try { sessionStorage.removeItem('quizResult'); } catch(e){}
+	// SAVE RESULT TO LOCAL STORAGE
+localStorage.setItem('lastResult', JSON.stringify(resultData));
 
-      // Environment
-      const envVals = [getValue('env1'), getValue('env2'), getValue('env3')];
-      const aCount = envVals.filter(v => v === 'A').length;
-      const env = aCount >= 2 ? 'A' : 'O';
+  });
+</script>
 
-      // Cognition counts
-      const cKeys = ['c1','c2','c3','c4','c5','c6','c7'];
-      const counts = {C:0, D:0, L:0};
-      cKeys.forEach(k => { counts[getValue(k)]++ });
-      const C = counts.C, D = counts.D, L = counts.L;
-
-      // Special cognition rule: exact 3C,3D,1L -> lateral (L)
-      let cog;
-      if(C === 3 && D === 3 && L === 1){
-        cog = 'L';
-      } else {
-        const max = Math.max(C, D, L);
-        if(C > D && C > L) cog = 'C';
-        else if(D > C && D > L) cog = 'D';
-        else if(L > C && L > D) cog = 'L';
-        else {
-          // deterministic tie-breaker: prefer L, then D, then C
-          if(L === max) cog = 'L';
-          else if(D === max) cog = 'D';
-          else cog = 'C';
-        }
-      }
-
-      // Execution majority (T vs W)
-      const eVals = [getValue('e1'), getValue('e2'), getValue('e3')];
-      const tCount = eVals.filter(v => v === 'T').length;
-      const exec = tCount >= 2 ? 'T' : 'W';
-
-      // Social majority (P vs Q)
-      const sVals = [getValue('s1'), getValue('s2'), getValue('s3')];
-      const pCount = sVals.filter(v => v === 'P').length;
-      const social = pCount >= 2 ? 'P' : 'Q';
-
-      // Temperament majority (SK vs SL)
-      const tVals = [getValue('t1'), getValue('t2'), getValue('t3')];
-      const skCount = tVals.filter(v => v === 'SK').length;
-      const temperament = skCount >= 2 ? 'SK' : 'SL';
-
-      const prefix = `${env}${cog}${exec}${social}`;
-      const fullCode = `${prefix}-${temperament}`;
-
-      // lookup exact archetype name
-      let archetype = archetypeMap[fullCode] || null;
-
-      // if no exact match, attempt prefix match (ignore temperament)
-      if(!archetype){
-        const keys = Object.keys(archetypeMap);
-        const prefixMatches = keys.filter(k => k.startsWith(prefix));
-        if(prefixMatches.length === 1){
-          archetype = archetypeMap[prefixMatches[0]] + ' (close match)';
-        } else if(prefixMatches.length > 1){
-          archetype = archetypeMap[prefixMatches[0]] + ' (close match)';
-        }
-      }
-
-      // Update UI with code and name
-      const card = document.getElementById('resultCard');
-      document.getElementById('resultCode').textContent = fullCode;
-      document.getElementById('resultName').textContent = archetype || `${fullCode} — (no archetype found)`;
-      document.getElementById('resultNote').textContent = 'The archetype page will now open (if available).';
-
-      // Determine filename and set link
-      let targetFile = null;
-      if(archetype){
-        // remove " (close match)" suffix if present
-        const cleanName = archetype.replace(' (close match)','');
-        targetFile = filenameFromName(cleanName);
-      } else {
-        // try prefix fallback: check archetypeMap keys for prefix
-        const keys = Object.keys(archetypeMap);
-        const prefixMatches = keys.filter(k => k.startsWith(prefix));
-        if(prefixMatches.length === 1){
-          targetFile = filenameFromName(archetypeMap[prefixMatches[0]]);
-          archetype = archetypeMap[prefixMatches[0]] + ' (close match)';
-          document.getElementById('resultName').textContent = archetype;
-        } else if(prefixMatches.length > 1){
-          // ambiguous: show message, provide small list of options (first chosen for redirect if desired)
-          targetFile = filenameFromName(archetypeMap[prefixMatches[0]]);
-          archetype = archetypeMap[prefixMatches[0]] + ' (ambiguous match; chosen first)';
-          document.getElementById('resultName').textContent = archetype;
-        }
-      }
-
-      // show link (if targetFile available)
-      const resultLink = document.getElementById('resultLink');
-      if(targetFile){
-        resultLink.href = targetFile;
-        resultLink.textContent = 'Open archetype page (' + targetFile + ')';
-        resultLink.style.display = 'inline-block';
-      } else {
-        resultLink.href = '#';
-        resultLink.textContent = 'No archetype page available';
-        resultLink.style.display = 'inline-block';
-      }
-
-      // Reveal the result card
-      card.style.display = 'block';
-      card.scrollIntoView({behavior: 'smooth', block: 'center'});
-      card.setAttribute('tabindex','-1');
-      card.focus();
-
-      // Automatic navigation behavior:
-      // If we have an exact or fallback file, navigate to it. This uses window.location.assign so
-      // the browser goes to the named file (expects that file to exist in same folder).
-      // If you prefer not to auto-navigate, remove or comment out the block below.
-      if(targetFile){
-        try {
-          // small delay so the user sees the textual result before redirect (200ms)
-          setTimeout(() => {
-            window.location.assign(targetFile);
-          }, 200);
-        } catch (err){
-          // if navigation fails, do nothing — link remains for manual click
-          console.error('Redirect failed', err);
-        }
-      }
-    }
-
-    document.getElementById('getResult').addEventListener('click', function(e){
-      e.preventDefault();
-      computeResult();
-    });
-
-    document.getElementById('resetBtn').addEventListener('click', function(){
-      document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
-      document.getElementById('resultCard').style.display = 'none';
-      document.getElementById('incompleteAlert').style.display = 'none';
-    });
-
-    // Example anchors: you can point these to real pages
-    document.getElementById('explainAnchor').addEventListener('click', function(e){
-      e.preventDefault();
-      alert('Test explanation: This is a 5-axis typology. Answer honestly and click Get Result.');
-    });
-    document.getElementById('historyAnchor').addEventListener('click', function(e){
-      e.preventDefault();
-      alert('History: Add your test history page or implement a save/load feature later.');
-    });
-    document.getElementById('creatorAnchor').addEventListener('click', function(e){
-      e.preventDefault();
-      alert('Creator: Put creator/credits page here.');
-    });
-  </script>
 </body>
 </html>
-
-
-
