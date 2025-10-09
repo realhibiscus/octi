@@ -3,14 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>OCTI TEST</title>
+  <title>Personality Quiz — ALTQ System (Final)</title>
   <style>
+     /* ===============================
+       COLOR GUIDE (change per personality)
+       ===============================
+       --hero-color: main background colour of the header
+       --hero-text: text colour inside the header
+       --accent: highlight colour for titles, small buttons
+       --page-bg: page background
+       =============================== */
 
     :root{
-      --hero-color: #696969;
-      --hero-text: #FFFFFF; 
-      --accent: #FFFFFF; 
-      --page-bg: #FFFFFF; 
+      --hero-color: #696969; /* light blue — change this to personality theme colour */
+      --hero-text: #FFFFFF; /* text colour on hero */
+      --accent: #FFFFFF; /* accent colour for links/titles */
+      --page-bg: #FFFFFF; /* overall background */
       --max-width: 900px;
       --body-text: #222;
       --muted: #444;
@@ -395,7 +403,7 @@
           </div>
         </div>
 
-        <div class="note">Be happy with what you get because that is the real you.</div>
+        <div class="note">Note: the quiz shows the technical code (example: ALTQ-SK) to participants after they click Get Result.</div>
       </section>
   
   <div class="controls">
@@ -458,7 +466,7 @@
   // colour map (exact)
   const colorMap = {
     "Enigma":"#2b2b2b","Codebreaker":"#2b2b2b","Clockmaker":"#2b2b2b","Theorist":"#2b2b2b","Mastermind":"#2b2b2b","Scholastic":"#2b2b2b",
-    "Canonist":"#acb0ff","Legislator":"#acb0ff","Architect":"#acb0ff","Director":"#acb0ff","Orchestrator":"#acb0ff","Taskmaster":"#acb0ff",
+    "Canonist":"#93B4F8","Legislator":"#93B4F8","Architect":"#93B4F8","Director":"#93B4F8","Orchestrator":"#93B4F8","Taskmaster":"#93B4F8",
     "Loremaster":"#a2f1a1","Visionary":"#a2f1a1","Inventor":"#a2f1a1","Explorer":"#a2f1a1","Investigator":"#a2f1a1","Tinkerer":"#a2f1a1",
     "Ritualist":"#c592f2","Conservator":"#c592f2","Collector":"#c592f2","Crafter":"#c592f2","Steward":"#c592f2","Artist":"#c592f2",
     "Guardian":"#fe9d5d","Confessor":"#fe9d5d","Sage":"#fe9d5d","Counselor":"#fe9d5d","Facilitator":"#fe9d5d","Instructor":"#fe9d5d",
@@ -660,11 +668,11 @@ try {
     document.getElementById('exePct').textContent = execPct + '%';
     applyBar('exeBar', execPct);
 
-    document.getElementById('socChosen').textContent = social==='P' ? 'Public (P)' : 'Quiet (Q)';
+    document.getElementById('socChosen').textContent = social==='P' ? 'People (P)' : 'Quiet (Q)';
     document.getElementById('socPct').textContent = socialPct + '%';
     applyBar('socBar', socialPct);
 
-    document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Cyclothymic (SK)' : 'Schizothymic (SL)';
+    document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Stable (SK)' : 'Labile (SL)';
     document.getElementById('tempPct').textContent = tempPct + '%';
     applyBar('tempBar', tempPct);
 
@@ -703,5 +711,3 @@ localStorage.setItem('lastResult', JSON.stringify(resultData));
 
 </body>
 </html>
-
-
