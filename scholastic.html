@@ -3,22 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Director — OCTP-SL Profile</title>
+  <title>Scholastic — OLTP-SK Profile</title>
   <style>
-    /* ===============================
-       COLOR GUIDE (change per personality)
-       ===============================
-       --hero-color: main background colour of the header
-       --hero-text: text colour inside the header
-       --accent: highlight colour for titles, small buttons
-       --page-bg: page background
-       =============================== */
-
+    
     :root{
-      --hero-color: #93B4F8; /* light blue — change this to personality theme colour */
-      --hero-text: #000452; /* text colour on hero */
-      --accent: #000452; /* accent colour for links/titles */
-      --page-bg: #ebecff; /* overall background */
+      --hero-color: #2b2b2b; /* light blue — change this to personality theme colour */
+      --hero-text: #0A0A0A; /* text colour on hero */
+      --accent: #0A0A0A; /* accent colour for links/titles */
+      --page-bg: #EBEBEB; /* overall background */
       --max-width: 900px;
       --body-text: #222;
       --muted: #444;
@@ -163,11 +155,10 @@
     .strong{font-weight:700}
 
 </style>
- 
 </head>
-<body data-archetype="Director">
+<body data-archetype="Scholastic">
 <script>
-  // ONE-TIME: create global palette only if not already present
+  
   if (typeof window.colorMap === 'undefined' || !window.colorMap) {
     window.colorMap = {
       "Enigma":"#2b2b2b","Codebreaker":"#2b2b2b","Clockmaker":"#2b2b2b","Theorist":"#2b2b2b","Mastermind":"#2b2b2b","Scholastic":"#2b2b2b",
@@ -187,7 +178,7 @@
       <div class="site-title">OCTI by A.R.C.</div>
     </div>
     <nav class="nav-links">
-       <a href="take_test.html">Take Test</a>
+      <a href="take_test.html">Take Test</a>
       <a href="index.html">Test Explanation</a>
 	  <a href="alltype.html">All Types</a>
       <a href="history.html">History</a>
@@ -199,27 +190,26 @@
     <div class="container">
       <div class="title-row">
         <h1 style="color:white">
-		Director
+		Scholastic
 		</h1>
         <div class="code">
-		OCTP-SL
+		OLTP-SK
 		</div>
 		<div class="code">
-		BLUE
+		BLACK
 		</div>
       </div>
       <div class="subtitle">
-	  The passionate visionary who brings people together to build a better future.
-	  </div>
+	  The formidable scholar who dedicates their life to defending the one true meaning of a text.
     </div>
   </section>
 
   <main class="container">
     <section class="card">
 	  <div class="type-quote">
-		"We have the plan. We have the people. We have the passion. Let's begin."
+		"I would say to grasp infinity is to mistake imagination for reality. True understanding makes you recognize there is no sum that will stretch beyond the horizon."
 		<span class="quote-author">
-		— Quartzère de Crownell
+		— Catherine Ashford
 </span>
 		</div>
 		
@@ -268,10 +258,9 @@
         </div>
       </div>
     </div>
-  </div>
+  
 
   <script>
-    // your color map
     const colorMap = {
       "Enigma":"#2b2b2b","Codebreaker":"#2b2b2b","Clockmaker":"#2b2b2b","Theorist":"#2b2b2b","Mastermind":"#2b2b2b","Scholastic":"#2b2b2b",
       "Canonist":"#93B4F8","Legislator":"#93B4F8","Architect":"#93B4F8","Director":"#93B4F8","Orchestrator":"#93B4F8","Taskmaster":"#93B4F8",
@@ -283,7 +272,6 @@
       "Purist":"#ffff85","Diagnostician":"#ffff85","Artificier":"#ffff85","Engineer":"#ffff85","Master":"#ffff85","Artisan":"#ffff85"
     };
 
-    // helper to normalise archetype strings for robust comparison
     function normName(s){
       return String(s || '').toLowerCase().replace(/\s*\(.*\)\s*$/,'').trim();
     }
@@ -383,43 +371,43 @@
       <p>
 	  You are a
 	  <span class="strong">
-	  Director
+	  Scholastic
 	  </span>, 
-	  a natural-born leader, a community-builder, and a powerful force for positive change. When you look at a chaotic or struggling group, you don't see potential. You feel a deep, driving need to create a clear plan that will guide everyone to success and stability.
+	  a master scholar and a powerful debater, likely the world's foremost authority on your chosen subject. You have a deep, almost sacred respect for a specific complex system of thought, be it a body of law, a foundational philosophy, or a work of literature. After years of intense study, you believe you have discovered, through a brilliant and unexpected insight, the one "correct" way to interpret it that resolves all its hidden contradictions.
 	  </p>
 		<p> 
-		But you're not an authoritarian leader who gives orders from on high. Your greatest gift is your infectious charisma. You bring people together, you listen, you inspire, and you get everyone genuinely excited to work towards a shared goal. You lead with such passion and genuine care for your team that people adopt your plan as if it was their own dream, and they believe in you wholeheartedly.
+		Your passion is also in defending it in the arena of ideas. You thrive in the intellectual combat of the lecture hall, the courtroom, or the academic journal. You aim to win by presenting an argument so airtight, so rooted in the text, and so relentlessly logical that it simply cannot be refuted. You see yourself as the ultimate guardian of your subject's intellectual purity.
 		</p>
 		<p> 
-		Your growth lies in learning to trust your team's creativity, not just their ability to follow your instructions. Practice building flexibility into your plans and empowering a trusted second-in-command to take on real responsibility. The ultimate test of your leadership is building a team that is strong and creative enough to continue building even when you're not in the room.
+		Your growth lies in learning that understanding is a more valuable goal than winning. Practice arguing for the merits of an interpretation you personally disagree with. This "steel man" exercise can build intellectual empathy and show you that other logical frameworks can exist. Find a colleague you respect but disagree with, and enter a discussion with the stated goal of being able to perfectly articulate their point of view by the end of it.
 		</p>
 		<div class="sep"></div>
 		 <h2>Component Analysis</h2>
       <ul class="list">
         <li><strong>
-		O (Orderly): 
+		O (Orderly):
 		</strong> 
-		Their foundational approach is to create and implement robust, predictable systems. They believe success comes from a well-designed plan.
+		They are the ultimate authority on a pre-existing, complex intellectual system—a body of law, a philosophical text, or a sacred canon.
 		</li>
         <li><strong>
-		C (Convergent):
+		L (Lateral):
 		</strong> 
-		Their plans are built on deductive logic, designed to achieve a single, correct, and optimal outcome.
+		Their intellectual signature is the ability to produce a single, brilliant, and non-obvious interpretation that purports to be the only "true" and logically consistent reading of the system.
 		</li>
         <li><strong>
 		T (Thinking):
 		</strong> 
-		Their primary output is the plan itself, the comprehensive strategy, the organizational chart, the set of rules that will guide the group.
+		Their entire work is conceptual, focusing on textual analysis, logical proofs, and the construction of irrefutable arguments.
 		</li>
         <li><strong>
 		P (Public):
 		</strong> 
-		They build these systems collaboratively, seeking input and buy-in from the group. They are natural, public-facing leaders.
+		They are formidable academic debaters, defending their interpretations in public forums like lecture halls, scholarly journals, or courtrooms.
 		</li>
         <li><strong>
-		SL (Cyclothymic):
+		SK (Schizothymic):
 		</strong> 
-		They lead with passion and charisma. They genuinely care for the people within their system and use their infectious energy to inspire and motivate the group.
+		They are intellectually ruthless and dispassionate. Their goal is to prove their logical supremacy. They are guardians of what they see as the objective, correct interpretation.
 		</li>
       </ul>
 
@@ -428,17 +416,17 @@
 	   <h2>Synthesized Profile</h2>
       <p class="muted">
 	  The <span class="strong">
-	  OCTP-SL
+	  OLTP-SK
 	  </span> 
-	  is the benevolent builder of communities, the charismatic organizer. Unlike Adaptive types who react to the world, this individual seeks to shape it according to a well-ordered plan. They are natural leaders who see chaos and feel a deep-seated need to build a system that will bring stability and success to the group. They design this system meticulously (O+C+T), but they do so in the open, working with their people (P). Their greatest strength is their Cyclothymic nature (SL); they are usually not cold autocrats, but beloved leaders. They inspire people to follow their vision with genuine passion and a heartfelt belief that their plan will be for the good of all.
+	  is the unyielding scholastic, the purist of interpretation. They are the high priest of a text, the ultimate guardian of its intellectual purity. They have a total, encyclopedic mastery of their chosen system (O+T), and they use their lateral mind (L) to construct a single, "correct" interpretation that resolves all internal contradictions. They then defend this interpretation in the public arena (P) with the unforgiving steel of logic (SK). They see themselves as the sole defender of a system's integrity against the chaos of flawed, sentimental, or lazy thinking.
 	  </p>
-				
+
       <p>
 	  A
 	  <strong>
-	  Director
+	  Scholastic
 	  </strong> 
-	   (like that of a film or play) has a singular, ordered vision (O+C+T) that they work to bring to life. This process is inherently social, requiring the coordination and motivation of a large cast and crew (P). A great director is also a charismatic leader, inspiring their team with passion and a clear vision to create something wonderful together (SL). The name perfectly captures the blend of structured planning and people-centric leadership.
+	 is a master of a traditional system of thought, known for their adherence to rigorous logical disputation. This title perfectly captures this type's profile as a formidable academic debater (P) who uses their intellectual genius (L) to defend what they see as the one, true, logical interpretation of an established canon (O+T) with a cool, dispassionate authority (SK).
 	  </p>
 		
 		
@@ -446,19 +434,19 @@
 		<h2>Strength</h2>
       <ul class="list">
         <li><strong>
-		Inspirational Leadership:
+		Impenetrable Logic:
 		</strong> 
-		Your passion and genuine care for people are contagious. You have a rare talent for motivating a diverse group to set aside their differences and work together towards a single, ambitious goal.
+		You are incredibly thorough and rigorous in your analysis. Your arguments are built like a fortress, with every point supported by deep evidence and reason, making them extremely difficult to tear down.
 		</li>
         <li><strong>
-		Visionary Planning:
+		Unshakeable Confidence:
 		</strong> 
-		You excel at creating clear and effective plans. You can see the grand vision and simultaneously map out the practical, step-by-step path to get there.
+		You have a powerful and unwavering belief in the correctness of your own interpretation. This gives you the intellectual courage to stand your ground in any debate, no matter how powerful or popular your opponent.
 		</li>
         <li><strong>
-		Community Building:
+		Encyclopedic Mastery:
 		</strong> 
-		You build teams that feel like families. You make every member feel valued, heard, and like they are an essential part of something bigger than themselves.
+		You achieve a level of knowledge on your chosen subject that is second to none. You don't just know the text; you've memorized it, cross-referenced it, and analyzed it from every conceivable angle.
 		</li>
       </ul>
 	  
@@ -466,61 +454,70 @@
 	  	<h2>Weaknesses</h2>
       <ul class="list">
         <li><strong>
-		Can Be Overly Idealistic:
+		Intellectual Arrogance:
 		</strong> 
-		Your passionate belief in your vision and your people can sometimes become a blind spot, causing you to underestimate real-world obstacles or ignore critical feedback.
+		You can be so convinced of your own logical supremacy that you come across as pedantic, condescending, and dismissive of anyone who disagrees with you. You tend to talk at people, not with them.
 		</li>
         <li><strong>
-		Tendency to Micromanage:
+		Combative Nature:
 		</strong> 
-		Because your plan is so clear and detailed in your mind, you can struggle when others want to improvise or deviate from it, which can sometimes stifle your team's creativity.
+		You often see intellectual discussion as a zero-sum debate to be won, not a collaborative effort to find truth. This can alienate colleagues and turn potential allies into adversaries.
 		</li>
         <li><strong>
-		Prone to Burnout:
+		Loses the Forest for the Trees:
 		</strong> 
-		Your deep sense of responsibility for the project and the well-being of your team can lead you to take on too much of the emotional and practical burden yourself.
+		You can become so obsessed with the minute details of a text that you miss its broader, humanistic, or spiritual meaning. You can perfectly explain the grammar of a poem while completely missing its beauty.
 		</li>
       </ul>
 
 		<div class="sep"></div>
 		  	<h2>Core Desire</h2>
       <p>
-	  To unite a community and lead them in successfully building something meaningful and lasting.
+	  To win the argument and establish their interpretation as the definitive, logically correct standard.
 	  </p>
 
 		<h2>
 		Core Fear
 		</h2>
       <p>
-	  Letting their people down. Watching the team lose faith or fall into conflict, causing their shared dream to collapse.
+	 Being proven logically wrong, especially in a public debate. The thought of a flaw being exposed in their own fortress of logic is terrifying.
 	  </p>
 	  
 	  	  	<div class="sep"></div>
 	  	<h2>Best Career or Role</h2>
       <ul class="list">
         <li>
-		Film or Theater Director:
+		Academic Professor
 		</li>
         <li>
-		Startup Founder or CEO
+		Mathematician
 		</li>
         <li>
-		Political Campaign Manager
+		Appellate Lawyer or Constitutional Lawyer
 		</li>
 		<li>
-		Head Coach of a professional sports team
+		Theologian or Apologist
 		</li>
         <li>
-		Event Producer
+		Literary Critic
 		</li>
 		<li>
-		Military General
+		High-Level Policy Debater or Pundit
 		</li>
 		<li>
-		School Principal
+		Contract Law Specialist
 		</li>
 		<li>
-		Teacher
+		Programming Language Theorist
+		</li>
+		<li>
+		Revisionist Historian
+		</li>
+		<li>
+		Art Historian
+		</li>
+		<li>
+		Physicist
 		</li>
       </ul>
  
@@ -528,25 +525,25 @@
 		<h2>Fictional Characters</h2>
       <ul class="list">
         <li>
-		Erwin Smith (Attack on Titan)
+		Sheldon Cooper (The Big Bang Theory)
 		</li>
         <li>
-		Professor Charles Xavier (X-Men)
+		Javert (Les Misérables)
 		</li>
         <li>
-		Jed Bartlet (The West Wing)
+		Satsuki Kiryuin (Kill la Kill)
 		</li>
       </ul>
 	  <h2>Real Life People</h2>
       <ul class="list">
         <li>
-		Steven Spielberg
+		Antonin Scalia
 		</li>
         <li>
-		Shonda Rhimes
+		Ayn Rand
 		</li>
         <li>
-		Walt Disney
+		Vladimir Lenin
 		</li>
       </ul>
 	  <div class="sep"></div>
@@ -554,13 +551,11 @@
 	  <div id="container"></div>
 	  <script>
 
-
-// EDIT HERE STUPID)
 const data = [
   {
     name: "COMPABILITY WITH OTHERS",
-    best: ["Master","Artisan","Instructor","Legislator","Orchestrator"],
-    worst: ["Enigma","Codebreaker","Theorist","Artificier","Purist"]
+    best: ["Purist","Canonist","Legislator","Sophist","Taskmaster"],
+    worst: ["Trickster","Innovator","Artist","Game-Changer","Tinkerer"]
   },
 ];
 
