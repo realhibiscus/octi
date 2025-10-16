@@ -92,6 +92,124 @@
     }
 
     .nav-links a:hover{opacity:0.7;}
+	/* Keep header above drawer so logo remains visible */
+header.site-header {
+  position: relative;
+  z-index: 60; /* higher than drawer and overlay */
+}
+
+/* make logo button visually neutral but accessible */
+.logo-btn{
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1;
+}
+.logo-btn:focus{ outline: 3px solid rgba(255,255,255,0.08); border-radius:8px; }
+
+/* Drawer overlay (dim background) - sits under header */
+.drawer-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 45; /* under header (60) but above page */
+  opacity: 0;
+  transition: opacity .22s ease;
+  pointer-events:none;
+}
+
+/* Visible overlay */
+.drawer-overlay.open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Side drawer */
+.side-drawer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 320px;                /* desktop drawer width */
+  max-width: 84%;
+  transform: translateX(-100%);
+  transition: transform .28s cubic-bezier(.2,.9,.2,1);
+  z-index: 50;                 /* under header (60) but above page */
+  will-change: transform;
+  box-shadow: 6px 0 24px rgba(0,0,0,0.18);
+  background: var(--hero-color, #111);
+  color: white;
+  pointer-events: none;
+}
+
+/* open state */
+.side-drawer.open{
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* drawer inner: fill the drawer and allow nav to scroll */
+.drawer-inner{
+  padding: 20px;
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* NEW: make inner fill height and allow content scrolling while footer stays visible */
+  height: 100%;
+  overflow: auto;
+}
+
+/* footer sits flush to the bottom */
+.drawer-footer{
+  margin-top: auto;           /* pushes footer to bottom */
+  padding-top: 12px;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+  opacity: 0.9;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* brand blue */
+.drawer-footer .brand{
+  color: #005FB8;    /* adjust to your preferred blue */
+  font-weight: 600;
+}
+
+
+/* close button inside drawer */
+.drawer-close{
+  background: transparent;
+  border: 0;
+  font-size: 28px;
+  line-height: 1;
+  color: inherit;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+/* drawer nav links */
+.drawer-nav{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+.drawer-nav a{
+  display:block;
+  text-decoration:none;
+  color: inherit;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.drawer-nav a:hover{ background: rgba(255,255,255,0.03); }
+
+/* Smaller screens: narr
 
     /* ===============================
        HERO SECTION
@@ -183,18 +301,42 @@
   }
 </script>
   <header class="site-header">
-    <div class="logo-area">
-      <img src="arc_white.png" alt="Anthemia logo" class="logo-placeholder"></img>
-      <div class="site-title">OCTI by A.R.C.</div>
-    </div>
-    <nav class="nav-links">
-       <a href="take_test.html">Take Test</a>
-      <a href="index.html">Test Explanation</a>
-	  <a href="alltype.html">All Types</a>
+  <div class="logo-area">
+    <!-- logo button toggles the drawer -->
+    <button id="logoBtn" class="logo-btn" aria-controls="sideDrawer" aria-expanded="false" aria-label="Open menu">
+      <img src="arc_white.png" alt="Anthemia logo" class="logo-placeholder">
+    </button>
+    <div class="site-title">OCTI by A.R.C.</div>
+  </div>
+
+  <nav class="nav-links desktop-nav" aria-label="Primary navigation">
+	<a href="take_test.html">Take Test</a>
+	<a href="index.html">Test Explanation</a>
+    <a href="alltype.html">All Types</a>
+    <a href="history.html">History</a>
+    <a href="author.html">Creator</a>
+  </nav>
+</header>
+
+<!-- LEFT SLIDE-IN DRAWER + OVERLAY -->
+<div id="drawerOverlay" class="drawer-overlay" hidden></div>
+
+<aside id="sideDrawer" class="side-drawer" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="drawer-inner">
+    <button id="drawerClose" class="drawer-close" aria-label="Close menu">&times;</button>
+
+    <nav class="drawer-nav" aria-label="Drawer navigation">
+      <a href="take_test.html">Take Test</a>
+	  <a href="index.html">Test Explanation</a>
+      <a href="alltype.html">All Types</a>
       <a href="history.html">History</a>
       <a href="author.html">Creator</a>
     </nav>
-  </header>
+  <div class="drawer-footer">
+  © <span id="drawerYear"></span> <span class="brand">Blue Imagination</span>
+	</div>
+  </div>
+</aside>
 
   <section class="hero">
     <div class="container">
@@ -271,7 +413,76 @@
   </div>
 
   <script>
-    // your color map
+(function(){
+  const logoBtn = document.getElementById('logoBtn');
+  const sideDrawer = document.getElementById('sideDrawer');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerClose = document.getElementById('drawerClose');
+
+  if(!logoBtn || !sideDrawer || !drawerOverlay) return;
+
+  // helpers
+  function openDrawer(){
+    sideDrawer.classList.add('open');
+    drawerOverlay.classList.add('open');
+    sideDrawer.setAttribute('aria-hidden','false');
+    logoBtn.setAttribute('aria-expanded','true');
+    drawerOverlay.hidden = false;
+    // prevent page scroll while drawer open
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    // focus the close button for keyboard users
+    setTimeout(()=> drawerClose && drawerClose.focus(), 160);
+  }
+  function closeDrawer(){
+    sideDrawer.classList.remove('open');
+    drawerOverlay.classList.remove('open');
+    sideDrawer.setAttribute('aria-hidden','true');
+    logoBtn.setAttribute('aria-expanded','false');
+    // allow overlay to fade, then hide attribute
+    setTimeout(()=> { drawerOverlay.hidden = true; }, 260);
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    // return focus to logo
+    logoBtn.focus();
+  }
+  function toggleDrawer(){ sideDrawer.classList.contains('open') ? closeDrawer() : openDrawer(); }
+
+  // open/close on logo click (works on desktop + touch)
+  logoBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    toggleDrawer();
+  });
+
+  // close handlers
+  drawerOverlay.addEventListener('click', closeDrawer);
+  drawerClose && drawerClose.addEventListener('click', closeDrawer);
+
+  // close with Escape key
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && sideDrawer.classList.contains('open')) closeDrawer();
+  });
+
+// if window resized larger and drawer open, keep it usable (still open)
+  // optionally close on resize to desktop — uncomment if desired:
+  // window.addEventListener('resize', ()=> { if(window.innerWidth > 1200 && sideDrawer.classList.contains('open')) closeDrawer(); });
+
+  // trap focus inside drawer while open (basic)
+  document.addEventListener('focus', function(e){
+    if(!sideDrawer.classList.contains('open')) return;
+    if(sideDrawer.contains(e.target)) return;
+    // if focus moves outside, bring it back to drawer
+    e.stopPropagation();
+    drawerClose && drawerClose.focus();
+  }, true);
+
+})();
+
+// set year in footer
+  (function(){ 
+    const el = document.getElementById('drawerYear');
+    if(el) el.textContent = new Date().getFullYear();
+  })();
     const colorMap = {
       "Enigma":"#2b2b2b","Codebreaker":"#2b2b2b","Clockmaker":"#2b2b2b","Theorist":"#2b2b2b","Mastermind":"#2b2b2b","Scholastic":"#2b2b2b",
       "Canonist":"#93B4F8","Legislator":"#93B4F8","Architect":"#93B4F8","Director":"#93B4F8","Orchestrator":"#93B4F8","Taskmaster":"#93B4F8",
