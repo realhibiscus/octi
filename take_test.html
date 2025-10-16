@@ -224,6 +224,8 @@
     
       </div>
       <div class="subtitle">Simple question, answer them all. Please do not refresh page before submitting.</div>
+	  <div class="subtitle">Please answer what you TRULY want! not what you think is RIGHT.</div>
+	  <div class="subtitle">Jawab sesuai keinginanmu, jangan ngikut apa yang benar atau salah.</div>
     </div>
   </section>
 
@@ -503,6 +505,7 @@
           </div>
         </div>
 		
+		
       </section>
 
       <section aria-labelledby="social">
@@ -576,6 +579,14 @@
           <div class="options">
             <label class="option"><input type="radio" name="s9" value="Q">Drained by being around people, and needs to be recharged with alone time.</label>
             <label class="option"><input type="radio" name="s9" value="P">Charged up by being around people, like a solar panel in the sun.</label>
+          </div>
+        </div>
+		
+		<div class="question">
+          <div class="qtitle">When is the best time you can think the best?</div>
+          <div class="options">
+            <label class="option"><input type="radio" name="s10" value="Q"> Thinking quietly on your own.</label>
+            <label class="option"><input type="radio" name="s10" value="P"> Being around others, talking, and sharing ideas.</label>
           </div>
         </div>
 		
@@ -654,6 +665,54 @@
             <label class="option"><input type="radio" name="t9" value="SK">The objective pros and cons and the most sensible outcome.</label>
           </div>
         </div>
+		
+		<div class="question">
+          <div class="qtitle">How do your moods behave usually?</div>
+          <div class="options">
+            <label class="option"><input type="radio" name="t10" value="SK"> Mostly stable, rarely swings dramatically.</label>
+            <label class="option"><input type="radio" name="t10" value="SL"> They rise and fall naturally; dynamic.</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="qtitle">How do you react to stress or excitement?</div>
+          <div class="options">
+            <label class="option"><input type="radio" name="t11" value="SL"> Emotional highs and lows come naturally.</label>
+            <label class="option"><input type="radio" name="t11" value="SK"> Stay calm, composed, and consistent.</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="qtitle">Which describes your energy rhythm?</div>
+          <div class="options">
+            <label class="option"><input type="radio" name="t12" value="SK"> Steady and reliable; energy level consistent.</label>
+            <label class="option"><input type="radio" name="t12" value="SL"> Cycles of highs and lows energize me.</label>
+          </div>
+        </div>
+		
+		<div class="question">
+          <div class="qtitle">Do you love taking care of others?</div>
+          <div class="options">
+            <label class="option"><input type="radio" name="t13" value="SL"> Of course, that's what makes us human.</label>
+			<label class="option"><input type="radio" name="t13" value="SK"> Not really.</label>
+          </div>
+        </div>
+		
+		<div class="question">
+          <div class="qtitle">Do you want to see other succeed?</div>
+          <div class="options">
+		    <label class="option"><input type="radio" name="t14" value="SK"> That's really not my concern</label>
+            <label class="option"><input type="radio" name="t14" value="SL"> Yes! I love when people I know be successful on doing what they want.</label>
+          </div>
+        </div>
+		
+		<div class="question">
+          <div class="qtitle">Do you think this world will be better if everyone use logic above everything else?</div>
+          <div class="options">
+		    <label class="option"><input type="radio" name="t15" value="SK"> Yes.</label>
+            <label class="option"><input type="radio" name="t15" value="SL"> No.</label>
+          </div>
+        </div>
 
         <div class="note">Be happy with what you get because that is the real you.</div>
       </section>
@@ -712,6 +771,7 @@
   </div>
 
  <script>
+
   // Auto-redirect delay (milliseconds). Edit this to change how long the result is shown before redirect.
   const AUTO_REDIRECT_DELAY_MS = 700;
 
@@ -775,179 +835,197 @@
   }
 
   function computeResult(){
-    document.getElementById('incompleteAlert').style.display='none';
-    if(!allAnswered()){
-      document.getElementById('incompleteAlert').style.display='block';
-      document.getElementById('resultCard').style.display='none';
-      return;
-    }
+  document.getElementById('incompleteAlert').style.display='none';
+  if(!allAnswered()){
+    document.getElementById('incompleteAlert').style.display='block';
+    document.getElementById('resultCard').style.display='none';
+    return;
+  }
 
-    // Environment
-    const envNames = uniqueNamesFor('env');
-    const envVals = envNames.map(n => getValue(n));
-    const envTotal = envVals.length;
-    const aCount = envVals.filter(v=>v==='A').length;
-    const oCount = envTotal - aCount;
-    const envChosen = aCount >= Math.ceil(envTotal/2) ? 'A' : 'O';
-    const envPct = envChosen==='A' ? computePercent(aCount, envTotal) : computePercent(oCount, envTotal);
+  // ----- WEIGHTS: put question names here that should be worth more than 1 -----
+  // Example: t10, t11, t12 etc. — change names & numbers to suit.
+  const weights = {
+	env3: 3,
+    c13: 3,
+	e2: 2,
+	e9: 2,
+	s10: 3,
+    t10: 2,
+    t11: 2,
+    t12: 2,
+    t13: 4,
+    t15: 4,
+    // add others like: env3: 2, c10: 1.5, e2: 2, ...
+  };
 
-    // Cognition
-    const cNames = uniqueNamesFor('c');
-    const cVals = cNames.map(n => getValue(n));
-    const cTotal = cVals.length;
-    const counts = {C:0,D:0,L:0};
-    cVals.forEach(v=>{
-      if(v==='C') counts.C++;
-      else if(v==='D') counts.D++;
-      else if(v==='L') counts.L++;
-    });
-    const C = counts.C, D = counts.D, L = counts.L;
-    let cog;
-    if(C===6 && D===6 && L===1) cog='L';
-    else {
-      const max = Math.max(C,D,L);
-      if(C> D && C> L) cog='C';
-      else if(D> C && D> L) cog='D';
-      else if(L> C && L> D) cog='L';
-      else {
-        if(L===max) cog='L';
-        else if(D===max) cog='D';
-        else cog='C';
-      }
-    }
-    const pctC = computePercent(C,cTotal);
-    const pctD = computePercent(D,cTotal);
-    const pctL = computePercent(L,cTotal);
+  // helper to get weight for a question name
+  function wFor(name){ return weights[name] || 1; }
 
-    // Execution
-    const eNames = uniqueNamesFor('e');
-    const eVals = eNames.map(n => getValue(n));
-    const eTotal = eVals.length;
-    const tCount = eVals.filter(v=>v==='T').length;
-    const wCount = eTotal - tCount;
-    const exec = tCount >= Math.ceil(eTotal/2) ? 'T' : 'W';
-    const execPct = exec==='T' ? computePercent(tCount,eTotal) : computePercent(wCount,eTotal);
+  // small helper to sum weighted votes across name list
+  function sumWeighted(names, matchValue){
+    return names.reduce((acc, nm) => {
+      const v = getValue(nm);
+      if(!v) return acc;
+      return acc + ((v === matchValue) ? wFor(nm) : 0);
+    }, 0);
+  }
 
-    // Social
-    const sNames = uniqueNamesFor('s');
-    const sVals = sNames.map(n => getValue(n));
-    const sTotal = sVals.length;
-    const pCount = sVals.filter(v=>v==='P').length;
-    const qCount = sTotal - pCount;
-    const social = pCount >= Math.ceil(sTotal/2) ? 'P' : 'Q';
-    const socialPct = social==='P' ? computePercent(pCount,sTotal) : computePercent(qCount,sTotal);
+  // helper to compute total weight (denominator) for a set of names
+  function totalWeight(names){
+    return names.reduce((acc, nm) => acc + wFor(nm), 0);
+  }
 
-    // Temperament
-    const tNames = uniqueNamesFor('t');
-    const tVals = tNames.map(n => getValue(n));
-    const tTotal = tVals.length;
-    const skCount = tVals.filter(v=>v==='SK').length;
-    const slCount = tTotal - skCount;
-    const temperament = skCount >= Math.ceil(tTotal/2) ? 'SK' : 'SL';
-    const tempPct = temperament==='SK' ? computePercent(skCount,tTotal) : computePercent(slCount,tTotal);
+  // --- Environment (A / O) ---
+  const envNames = uniqueNamesFor('env');
+  const envTotalWeight = totalWeight(envNames);
+  const aWeighted = sumWeighted(envNames, 'A');
+  const oWeighted = sumWeighted(envNames, 'O');
+  const envChosen = aWeighted >= oWeighted ? 'A' : 'O';
+  const envPct = envChosen === 'A' ? computePercent(aWeighted, envTotalWeight) : computePercent(oWeighted, envTotalWeight);
 
-    const prefix = `${envChosen}${cog}${exec}${social}`;
-    const fullCode = `${prefix}-${temperament}`;
+  // --- Cognition (C / D / L) ---
+  const cNames = uniqueNamesFor('c');
+  const cTotalWeight = totalWeight(cNames);
+  const sumC = sumWeighted(cNames, 'C');
+  const sumD = sumWeighted(cNames, 'D');
+  const sumL = sumWeighted(cNames, 'L');
 
-    let archetype = archetypeMap[fullCode] || null;
-    if(!archetype){
-      const keys = Object.keys(archetypeMap);
-      const prefixMatches = keys.filter(k => k.startsWith(prefix));
-      if(prefixMatches.length >= 1){
-        archetype = archetypeMap[prefixMatches[0]] + (prefixMatches.length > 1 ? ' (close/ambiguous match)' : ' (close match)');
-      }
-    }
+  // determine main cognition with tie-break rules (prefer L, then D, then C if tied)
+  let cog;
+  if (sumC > sumD && sumC > sumL) cog = 'C';
+  else if (sumD > sumC && sumD > sumL) cog = 'D';
+  else if (sumL > sumC && sumL > sumD) cog = 'L';
+  else {
+    // tie: prefer L, then D, else C
+    if (sumL === Math.max(sumC, sumD, sumL)) cog = 'L';
+    else if (sumD === Math.max(sumC, sumD, sumL)) cog = 'D';
+    else cog = 'C';
+  }
 
-    const cleanName = archetype ? archetype.replace(' (close/ambiguous match)','').replace(' (close match)','') : null;
-    const targetFile = cleanName ? filenameFromName(cleanName) : null;
+  const pctC = computePercent(sumC, cTotalWeight);
+  const pctD = computePercent(sumD, cTotalWeight);
+  const pctL = computePercent(sumL, cTotalWeight);
 
-    const resultData = {
-      code: fullCode,
-      finalType: cleanName || null,
-      env: { chosen: envChosen, pct: envPct, counts: {A: aCount, O: oCount, total: envTotal} },
-      cognition: { chosen: cog, pcts: {C: pctC, D: pctD, L: pctL}, counts: {C: C, D: D, L: L}, total: cTotal },
-      execution: { chosen: exec, pct: execPct, counts: {T: tCount, W: wCount, total: eTotal} },
-      social: { chosen: social, pct: socialPct, counts: {P: pCount, Q: qCount, total: sTotal} },
-      temperament: { chosen: temperament, pct: tempPct, counts: {SK: skCount, SL: slCount, total: tTotal} },
-      archetypeName: archetype
-    };
+  // --- Execution (T / W) ---
+  const eNames = uniqueNamesFor('e');
+  const eTotalWeight = totalWeight(eNames);
+  const tWeighted = sumWeighted(eNames, 'T');
+  const wWeighted = sumWeighted(eNames, 'W');
+  const exec = tWeighted >= wWeighted ? 'T' : 'W';
+  const execPct = exec === 'T' ? computePercent(tWeighted, eTotalWeight) : computePercent(wWeighted, eTotalWeight);
 
-    try { // Save to sessionStorage *and* localStorage to survive tab/navigation differences
-console.log('computeResult() reached — preparing to save resultData:', resultData);
+  // --- Social (P / Q) ---
+  const sNames = uniqueNamesFor('s');
+  const sTotalWeight = totalWeight(sNames);
+  const pWeighted = sumWeighted(sNames, 'P');
+  const qWeighted = sumWeighted(sNames, 'Q');
+  const social = pWeighted >= qWeighted ? 'P' : 'Q';
+  const socialPct = social === 'P' ? computePercent(pWeighted, sTotalWeight) : computePercent(qWeighted, sTotalWeight);
 
-try {
-  const json = JSON.stringify(resultData);
-  console.log('Serialized JSON length:', json.length);
+  // --- Temperament (SK / SL) ---
+  const tNames = uniqueNamesFor('t');
+  const tTotalWeight = totalWeight(tNames);
+  const skWeighted = sumWeighted(tNames, 'SK');
+  const slWeighted = sumWeighted(tNames, 'SL');
+  const temperament = skWeighted >= slWeighted ? 'SK' : 'SL';
+  const tempPct = temperament === 'SK' ? computePercent(skWeighted, tTotalWeight) : computePercent(slWeighted, tTotalWeight);
 
-  sessionStorage.setItem('quizResult', json);
-  console.log('sessionStorage.setItem -> OK');
+  // Build prefix & full code (note: cognition uses 'cog' variable)
+  const prefix = `${envChosen}${cog}${exec}${social}`;
+  const fullCode = `${prefix}-${temperament}`;
 
-  localStorage.setItem('quizResult', json);
-  console.log('localStorage.setItem -> OK');
-
-  localStorage.setItem('quizResult_ok', '1');
-  console.log('Saved quizResult_ok flag in localStorage -> OK');
-
-} catch (e) {
-  console.error('Failed to save quizResult:', e);
-}
-
-; } catch(e){ console.warn(e); }
-
-    const color = (cleanName && colorMap[cleanName]) ? colorMap[cleanName] : '#111';
-
-    document.getElementById('resultCode').textContent = fullCode;
-    document.getElementById('resultName').textContent = archetype || (fullCode + ' — (no archetype found)');
-    document.getElementById('resultNote').textContent = 'Percentages below show composition of answers for each axis.';
-
-    function clamp(n){ return Math.max(0, Math.min(100, n)); }
-    function applyBar(id, pct){
-      const el = document.getElementById(id);
-      if(el){ el.style.width = clamp(pct) + '%'; el.style.backgroundColor = color; }
-    }
-
-    document.getElementById('envChosen').textContent = envChosen==='A' ? 'Adaptive (A)' : 'Ordered (O)';
-    document.getElementById('envPct').textContent = envPct + '%';
-    applyBar('envBar', envPct);
-
-    document.getElementById('cogChosen').textContent = cog;
-    document.getElementById('cC').textContent = pctC + '%';
-    document.getElementById('cD').textContent = pctD + '%';
-    document.getElementById('cL').textContent = pctL + '%';
-    applyBar('cCbar', pctC); applyBar('cDbar', pctD); applyBar('cLbar', pctL);
-
-    document.getElementById('exeChosen').textContent = exec==='T' ? 'Thinker (T)' : 'Worker (W)';
-    document.getElementById('exePct').textContent = execPct + '%';
-    applyBar('exeBar', execPct);
-
-    document.getElementById('socChosen').textContent = social==='P' ? 'People (P)' : 'Quiet (Q)';
-    document.getElementById('socPct').textContent = socialPct + '%';
-    applyBar('socBar', socialPct);
-
-    document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Stable (SK)' : 'Labile (SL)';
-    document.getElementById('tempPct').textContent = tempPct + '%';
-    applyBar('tempBar', tempPct);
-
-    const resultLink = document.getElementById('resultLink');
-    if(targetFile){
-      resultLink.href = targetFile;
-      resultLink.textContent = 'Open archetype page (' + targetFile + ')';
-    } else {
-      resultLink.href = '#';
-      resultLink.textContent = 'No archetype page available';
-    }
-
-    document.getElementById('resultCard').style.display = 'block';
-    document.getElementById('resultCard').scrollIntoView({behavior:'smooth', block:'center'});
-
-    // === Auto-redirect (enabled) ===
-    if(targetFile){
-      setTimeout(() => {
-        // final navigation
-        try { window.location.assign(targetFile); } catch(e){ console.warn('Redirect failed', e); }
-      }, AUTO_REDIRECT_DELAY_MS);
+  // find archetype + filename (use your existing maps)
+  let archetype = archetypeMap[fullCode] || null;
+  if(!archetype){
+    const keys = Object.keys(archetypeMap);
+    const prefixMatches = keys.filter(k => k.startsWith(prefix));
+    if(prefixMatches.length >= 1){
+      archetype = archetypeMap[prefixMatches[0]] + (prefixMatches.length > 1 ? ' (close/ambiguous match)' : ' (close match)');
     }
   }
+
+  const cleanName = archetype ? archetype.replace(' (close/ambiguous match)','').replace(' (close match)','') : null;
+  const targetFile = cleanName ? filenameFromName(cleanName) : null;
+
+  // ---- result data object: note counts are now weighted sums (so may be fractional) ----
+  const resultData = {
+    code: fullCode,
+    finalType: cleanName || null,
+    env: { chosen: envChosen, pct: envPct, counts: {A: aWeighted, O: oWeighted, total: envTotalWeight} },
+    cognition: { chosen: cog, pcts: {C: pctC, D: pctD, L: pctL}, counts: {C: sumC, D: sumD, L: sumL}, total: cTotalWeight },
+    execution: { chosen: exec, pct: execPct, counts: {T: tWeighted, W: wWeighted, total: eTotalWeight} },
+    social: { chosen: social, pct: socialPct, counts: {P: pWeighted, Q: qWeighted, total: sTotalWeight} },
+    temperament: { chosen: temperament, pct: tempPct, counts: {SK: skWeighted, SL: slWeighted, total: tTotalWeight} },
+    archetypeName: archetype
+  };
+
+  // --- save resultData (your existing code used sessionStorage/localStorage) ---
+  try {
+    const json = JSON.stringify(resultData);
+    sessionStorage.setItem('quizResult', json);
+    localStorage.setItem('quizResult', json);
+    localStorage.setItem('quizResult_ok', '1');
+    // also save a copy under lastResult so reset handler doesn't try to access out-of-scope var
+    localStorage.setItem('lastResult', json);
+  } catch (e) {
+    console.error('Failed to save quizResult:', e);
+  }
+
+  // ---------- continue with your existing UI code (bars, text, redirect) ----------
+  const color = (cleanName && colorMap[cleanName]) ? colorMap[cleanName] : '#111';
+
+  document.getElementById('resultCode').textContent = fullCode;
+  document.getElementById('resultName').textContent = archetype || (fullCode + ' — (no archetype found)');
+  document.getElementById('resultNote').textContent = 'Percentages below show composition of answers for each axis.';
+
+  function clamp(n){ return Math.max(0, Math.min(100, n)); }
+  function applyBar(id, pct){
+    const el = document.getElementById(id);
+    if(el){ el.style.width = clamp(pct) + '%'; el.style.backgroundColor = color; }
+  }
+
+  document.getElementById('envChosen').textContent = envChosen==='A' ? 'Adaptive (A)' : 'Ordered (O)';
+  document.getElementById('envPct').textContent = envPct + '%';
+  applyBar('envBar', envPct);
+
+  document.getElementById('cogChosen').textContent = cog;
+  document.getElementById('cC').textContent = pctC + '%';
+  document.getElementById('cD').textContent = pctD + '%';
+  document.getElementById('cL').textContent = pctL + '%';
+  applyBar('cCbar', pctC); applyBar('cDbar', pctD); applyBar('cLbar', pctL);
+
+  document.getElementById('exeChosen').textContent = exec==='T' ? 'Thinker (T)' : 'Worker (W)';
+  document.getElementById('exePct').textContent = execPct + '%';
+  applyBar('exeBar', execPct);
+
+  document.getElementById('socChosen').textContent = social==='P' ? 'People (P)' : 'Quiet (Q)';
+  document.getElementById('socPct').textContent = socialPct + '%';
+  applyBar('socBar', socialPct);
+
+  document.getElementById('tempChosen').textContent = temperament==='SK' ? 'Stable (SK)' : 'Labile (SL)';
+  document.getElementById('tempPct').textContent = tempPct + '%';
+  applyBar('tempBar', tempPct);
+
+  const resultLink = document.getElementById('resultLink');
+  if(targetFile){
+    resultLink.href = targetFile;
+    resultLink.textContent = 'Open archetype page (' + targetFile + ')';
+  } else {
+    resultLink.href = '#';
+    resultLink.textContent = 'No archetype page available';
+  }
+
+  document.getElementById('resultCard').style.display = 'block';
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth', block:'center'});
+
+  // === Auto-redirect (enabled) ===
+  if(targetFile){
+    setTimeout(() => {
+      try { window.location.assign(targetFile); } catch(e){ console.warn('Redirect failed', e); }
+    }, AUTO_REDIRECT_DELAY_MS);
+  }
+}
+
 
   document.getElementById('getResult').addEventListener('click', function(e){ e.preventDefault(); computeResult(); });
   document.getElementById('resetBtn').addEventListener('click', function(){
